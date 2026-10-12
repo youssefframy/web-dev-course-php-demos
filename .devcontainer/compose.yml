@@ -1,0 +1,12 @@
+# Adds the container VS Code runs in. The db and adminer services come from ../docker-compose.yml.
+services:
+  workspace:
+    image: mcr.microsoft.com/devcontainers/base:bookworm
+    command: sleep infinity
+    volumes:
+      - ..:/workspaces/course:cached
+    environment:
+      DB_CMD: mariadb -h db -uroot -proot
+    depends_on:
+      db:
+        condition: service_healthy

@@ -1,0 +1,14 @@
+{
+  "name": "ICE Malta BED",
+  "dockerComposeFile": ["../docker-compose.yml", "compose.yml"],
+  "service": "workspace",
+  "runServices": ["workspace", "db", "adminer"],
+  "workspaceFolder": "/workspaces/course",
+  "forwardPorts": [8080],
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y mariadb-client",
+  "customizations": {
+    "vscode": {
+      "extensions": ["dineug.vuerd-vscode", "bierner.markdown-mermaid"]
+    }
+  }
+}

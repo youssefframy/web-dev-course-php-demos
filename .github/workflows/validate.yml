@@ -1,0 +1,25 @@
+name: Validate schemas
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: root
+        options: >-
+          --health-cmd "healthcheck.sh --connect --innodb_initialized"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply every schema.sql and seed.sql under modules/
+        env:
+          DB_CMD: docker exec -i ${{ job.services.mariadb.id }} mariadb -uroot -proot
+        run: scripts/validate.sh
