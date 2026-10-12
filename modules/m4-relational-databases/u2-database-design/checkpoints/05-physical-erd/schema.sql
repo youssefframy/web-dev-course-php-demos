@@ -1,0 +1,5 @@
+-- ICEAdmin: your physical design.
+--
+-- Export this file from ERD Editor (right-click the canvas, Export, SQL DDL)
+-- with the database set to MariaDB, then replace everything here with the export.
+-- Until then this file is a stub, and the validation skips it.
