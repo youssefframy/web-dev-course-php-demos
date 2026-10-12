@@ -32,6 +32,13 @@ If you open this repository in VS Code, it will offer to reopen it in a dev cont
 3. Each checkpoint ends with a "Done when" checklist. Tick every item before moving on.
 4. Commit after each checkpoint (see below).
 
+To run SQL against the database, use `scripts/sql.sh`. It works the same way on your computer and in the dev container:
+
+```sh
+echo "SHOW DATABASES;" | scripts/sql.sh
+scripts/sql.sh iceadmin < path/to/file.sql
+```
+
 To check every schema you have written, run:
 
 ```sh
