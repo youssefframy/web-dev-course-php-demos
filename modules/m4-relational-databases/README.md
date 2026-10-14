@@ -7,5 +7,6 @@ In this module you design a database from a written scenario, build it in MariaD
 | Unit | Title | Status |
 |---|---|---|
 | U2 | [Database Analysis & Design](u2-database-design/README.md) | Available |
+| U3 | [Creating The Physical Design](u3-physical-design/demo/README.md) | Demo |
 
 Back to the [course index](../../README.md).
