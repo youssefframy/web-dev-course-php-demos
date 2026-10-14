@@ -1,0 +1,40 @@
+Project IceAdmin {
+  database_type: 'MySQL'
+  Note: 'ICE Malta employees, departments and salary history.'
+}
+
+Enum basis {
+  PT
+  FT
+}
+
+Table Employee {
+  id INT [pk, increment, not null]
+  name VARCHAR(25) [not null]
+  surname VARCHAR(30) [not null]
+  jobTitle VARCHAR(15) [not null]
+  basis basis [default: 'FT']
+}
+
+Table Department {
+  id INT [pk, increment, not null]
+  name VARCHAR(20) [not null]
+}
+
+Table Salary {
+  id INT [pk, increment, not null]
+  fromDate DATE [not null]
+  toDate DATE [null, note: 'NULL means this is the current salary']
+  amount FLOAT [not null]
+  employeeId INT [not null]
+}
+
+Table EmployeeDepartment {
+  id INT [pk, increment, not null]
+  employeeId INT [not null]
+  departmentId INT [not null]
+}
+
+Ref c_salary_employee: Salary.employeeId > Employee.id
+Ref c_employeedepartment_employee: EmployeeDepartment.employeeId > Employee.id
+Ref c_employeedepartment_department: EmployeeDepartment.departmentId > Department.id

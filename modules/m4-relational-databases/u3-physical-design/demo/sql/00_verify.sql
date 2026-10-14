@@ -2,7 +2,7 @@
 
 SHOW DATABASES;
 
-USE IceAdmin;
+USE IceAdminDbml;
 
 SHOW TABLES;
 

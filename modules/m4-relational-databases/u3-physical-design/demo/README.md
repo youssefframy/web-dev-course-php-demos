@@ -81,6 +81,44 @@ All SQL files are in `sql/`. Run them in SQLTools with **Run on active connectio
 - Say: "Check the branch name before you push. Do not assume it is `master`."
 - Slide: none.
 
+## Extra: from DBML to the database
+
+`iceadmin.dbml` is the same physical design as `01_ddl.sql`, written as DBML, a short text format for diagrams. `iceadmin.svg` is the diagram drawn from it.
+
+![IceAdmin physical diagram](iceadmin.svg)
+
+Three commands take the design from DBML into MariaDB. Run them from the repository root, with the database running.
+
+1. Turn the DBML into MariaDB DDL:
+
+   ```sh
+   cd modules/m4-relational-databases/u3-physical-design/demo
+   npx -y -p @dbml/cli@10.3.1 dbml2sql iceadmin.dbml --mysql -o sql/05_ddl_from_dbml.sql
+   cd -
+   ```
+
+2. Create an empty database for it. A separate name keeps it apart from `IceAdmin`, so the two can be compared:
+
+   ```sh
+   echo "CREATE DATABASE IceAdminDbml;" | scripts/sql.sh
+   ```
+
+3. Apply the DDL:
+
+   ```sh
+   scripts/sql.sh IceAdminDbml < modules/m4-relational-databases/u3-physical-design/demo/sql/05_ddl_from_dbml.sql
+   ```
+
+Refresh the SQLTools connection and compare `SHOW CREATE TABLE Salary;` in both databases. The tables match, except that the DBML note on `toDate` becomes a column `COMMENT`. The generated file creates every table first, then adds the foreign keys with `ALTER TABLE`, so table order no longer matters. The diagram does not hold a database name, which is why step 2 creates one.
+
+To redraw the diagram after editing the DBML:
+
+```sh
+npx -y @softwaretechnik/dbml-renderer@1.0.31 -i iceadmin.dbml -o iceadmin.svg
+```
+
+To remove the copy: `DROP DATABASE IceAdminDbml;`.
+
 ## Notes for the presenter
 
 - The slides show `UPDATE Employee SET Salary = 40000 WHERE id = 2;`. That fails, because `Employee` has no `Salary` column. Salary lives in the `Salary` table, one row per period. `03_dml_changes.sql` uses the correct form.

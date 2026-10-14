@@ -1,4 +1,4 @@
-USE IceAdmin;
+USE IceAdminDbml;
 
 INSERT INTO Employee (name, surname, jobTitle, basis)
 VALUES
