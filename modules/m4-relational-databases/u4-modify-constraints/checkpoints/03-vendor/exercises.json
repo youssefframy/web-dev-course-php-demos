@@ -1,0 +1,36 @@
+{
+  "checkpoint": "m4u4-cp03",
+  "title": "Vendor",
+  "exercises": [
+    {
+      "id": "m4u4-03-breakit-length",
+      "type": "error",
+      "db": "iceadmin",
+      "file": "answers/break_length.sql",
+      "after": "m4u4-cp02",
+      "expect": 1406,
+      "hint": "Create Vendor with name VARCHAR(20), then insert all four vendors in one INSERT."
+    },
+    {
+      "id": "m4u4-03-predict",
+      "type": "manual",
+      "file": "PREDICT.md",
+      "hint": "Predict first. Then type the statements in ./sql shell iceadmin and look."
+    },
+    {
+      "id": "m4u4-03-vendor",
+      "type": "script",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_03_vendor.sql",
+      "assert": [
+        {"column": "Vendor.name", "type": "varchar(50)", "null": false},
+        {"column": "Vendor.website", "type": "varchar(50)", "null": false},
+        {"column": "Vendor.country", "type": "varchar(30)", "null": false},
+        {"column": "Vendor.brandManager", "type": "int", "null": false},
+        {"fk": "Vendor.brandManager -> Employee.id", "update": "RESTRICT", "delete": "RESTRICT"},
+        {"sql": "SELECT name, website, country, brandManager FROM Vendor ORDER BY name", "equals": "Adobe, https://adobe.com, USA, 1 | Digital Marketing Institute, https://digitalmarketinginstitute.com, Ireland, 2 | Linux Professional Institute, https://lpi.org, USA, 3 | Microsoft, https://microsoft.com, USA, 3", "say": "Vendor rows"}
+      ],
+      "hint": "CREATE TABLE, then ALTER TABLE Vendor CHANGE COLUMN name name VARCHAR(50) NOT NULL, then the INSERT."
+    }
+  ]
+}

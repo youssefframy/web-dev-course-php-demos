@@ -1,0 +1,2 @@
+-- Unit 4, checkpoint 03, step 3. This runs on a scratch copy, never on your iceadmin.
+-- Create Vendor with name VARCHAR(20), then insert the four vendors in one INSERT.

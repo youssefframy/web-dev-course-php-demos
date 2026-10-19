@@ -21,5 +21,6 @@ Your work goes in `db/iceadmin/` and `db/tvstudio/`. Each file there is one step
 |---|---|---|
 | 01 | [Alter columns](checkpoints/01-alter-columns/README.md) | A column added, changed and dropped |
 | 02 | [LeaveBooking](checkpoints/02-leavebooking/README.md) | LeaveBooking created and linked to Employee |
+| 03 | [Vendor](checkpoints/03-vendor/README.md) | Vendor created after a failed insert |
 
 Back to [Module 4](../README.md).

@@ -1,0 +1,1 @@
+-- Unit 4, checkpoint 03, step 6. Create Vendor, widen name, then insert the four vendors.
