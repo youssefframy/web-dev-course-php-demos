@@ -1,0 +1,68 @@
+{
+    "checkpoint": "m4u5-cp06",
+    "title": "Exercise 5.2",
+    "exercises": [
+        {
+            "id": "m4u5-06-5.2.1",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/5.2.1.sql",
+            "hash": "616fd54bf4c2ec50f58114d49850d55ec517fe3aad48a4e9f7a4ad5ce0d74239",
+            "hint": "JOIN Invoice, then DISTINCT.",
+            "rows": 2
+        },
+        {
+            "id": "m4u5-06-5.2.2",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/5.2.2.sql",
+            "setup": [
+                "INSERT INTO Client (id, name, surname) VALUES (7, 'Lucy', 'Pace')",
+                "INSERT INTO Invoice (total, cashierId, clientId, issueTime) VALUES (10.95, 1, 7, '2022-01-25 09:00:00')"
+            ],
+            "hash": "d68457dd8474a29df9fed4c8672e05b3466e619c41fbc4f8a97a4a14dc463eeb",
+            "hint": "LEFT JOIN, COUNT(Invoice.id), and GROUP BY Client.id, Client.name, Client.surname.",
+            "rows": 7
+        },
+        {
+            "id": "m4u5-06-5.2.3",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/5.2.3.sql",
+            "hash": "f0ee297bf515f4162a26bf6bc4c08afef7007fb32981c7769e8da35f84d0d985",
+            "hint": "One sub-query for invoices, one for payments, subtracted.",
+            "rows": 1
+        },
+        {
+            "id": "m4u5-06-5.2.4",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/5.2.4.sql",
+            "setup": [
+                "INSERT INTO Invoice (total, cashierId, clientId, issueTime) VALUES (50.00, 1, 3, '2022-01-23 09:00:00'), (21.95, 1, 6, '2022-01-23 09:30:00')",
+                "INSERT INTO Payment (issueTime, cashierId, clientId, paymentTypeId, total) VALUES ('2022-01-23 09:31:00', 1, 6, 1, 21.95)"
+            ],
+            "hash": "261396d908cacea326d6b4a4fa09bde761f5ad5e20ba1272cd95b2bf9b711188",
+            "hint": "COALESCE(..., 0) turns a missing sum into 0. Keep only balances above 0.",
+            "rows": 3
+        },
+        {
+            "id": "m4u5-06-5.2.5",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/5.2.5.sql",
+            "hash": "b71bab3cfef2ebf4128a9c8f901484608127509d02c19b833e10c4179f506b57",
+            "hint": "InvoiceItem to Item to Category, then GROUP BY Category.id, Category.catName.",
+            "rows": 3
+        },
+        {
+            "id": "m4u5-06-5.2.6",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/5.2.6.sql",
+            "hash": "313b75c77041e63a5d920aa2a8303cd3b9e8cd91e5309f9f8f608f88c88c2b32",
+            "hint": "Morning is from midnight up to, but not including, noon: >= '2022-01-22 00:00:00' AND < '2022-01-22 12:00:00'.",
+            "rows": 1
+        }
+    ]
+}
