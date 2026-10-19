@@ -25,6 +25,7 @@ Three databases run through Module 4. Each unit starts where the previous one en
 | m4u4-cp08 | iceadmin, tvstudio | No tables; `iceadmin.dbml` and `tvstudio.dbml` brought up to date | `db/*/*.dbml` (not chain steps) |
 | m4u5-cp01 | pos | No tables; `pos.dbml` generated with sql2dbml | `db/pos/pos.dbml` (not a chain step) |
 | m4u5-cp02 to cp07 | pos, joinlab, iceadmin | None. Queries only. Some checks add rows to their scratch copy | none |
+| m4u5-cp08 | tvstudio | Series, Director, Actor, Station, Episode, SeriesActor, Transmission: edge-case rows added (provided, idempotent) | `db/tvstudio/tvstudio-topup.sql` |
 
 ## Snapshots
 
@@ -34,6 +35,8 @@ Three databases run through Module 4. Each unit starts where the previous one en
 | `snapshots/tvstudio/after-m4u3.sql` | `./sql reset tvstudio --at m4u3` |
 | `snapshots/iceadmin/after-m4u4.sql` | `./sql reset iceadmin --at m4u4` |
 | `snapshots/tvstudio/after-m4u4.sql` | `./sql reset tvstudio --at m4u4` |
+| `snapshots/iceadmin/after-m4u5.sql` | `./sql reset iceadmin --at m4u5` (the same as after-m4u4: Unit 5 only reads iceadmin) |
+| `snapshots/tvstudio/after-m4u5.sql` | `./sql reset tvstudio --at m4u5` |
 | `seeds/pos.sql` | `./sql reset pos` |
 | `seeds/joinlab.sql` | `./sql reset joinlab` |
 
@@ -44,4 +47,9 @@ Three databases run through Module 4. Each unit starts where the previous one en
 - `after-m4u3` stores money as `DECIMAL(10,2)` and gives EmployeeDepartment `UNIQUE (employeeId, departmentId)`. The U3 slides use `FLOAT` and leave the pair unconstrained.
 - Unit 2's checkpoint 07 also builds an `iceadmin`, with different data. `./sql reset iceadmin` replaces it.
 - People's names follow Unit 3, because the chain starts there: Joe Mifsud, Lucy Marconi and Fred Wake. The Unit 4 slides show Joe Doe and Lucy Pace.
-- `seeds/pos.sql` keeps the gist's data exactly, including the typos "Forkes" and "Refridgeration", so results match the slides.
+- Unit 4 checkpoint 02 seeds LeaveBooking with the slides' two bookings for Lucy, plus three for Joe and Fred. Lucy's bookings are deleted with her in checkpoint 05, and Unit 5 still needs leave data. The slides' bad booking uses employee 3, who is Fred in iceadmin. The break-it uses employee 4 instead.
+- Unit 4 checkpoint 05 adds a fourth rule the slides leave out: `c_leavebooking_employee ON UPDATE CASCADE ON DELETE CASCADE`. Without it, Lucy's leave bookings block the delete.
+- The Unit 4 demonstrations that would change ids or remove the foreign key (ON UPDATE CASCADE, and dropping `c_leavebooking_employee`) run on scratch copies, so the chain is not affected.
+- Vendor ids are 1 to 4 after a rebuild. A student who ran the failing insert by hand sees 5 to 8 until they rebuild. No later query depends on Vendor ids.
+- Unit 5 uses U4's column names, `dateFrom` and `dateTo`. The U5 slides' sub-query uses `fromDate` and `toDate`.
+- - `seeds/pos.sql` keeps the gist's data exactly, including the typos "Forkes" and "Refridgeration", so results match the slides.

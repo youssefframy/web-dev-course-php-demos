@@ -668,6 +668,12 @@ function runExercise(array $ex, bool $fromSnapshot = false): array
         }
     }
 
+    foreach ($ex['assert'] ?? [] as $a) {
+        if (isset($a['drift']) && isEmptyFile(resolve($a['drift'], $ex['dir']))) {
+            return $result('PENDING', rel(resolve($a['drift'], $ex['dir'])) . ' is empty');
+        }
+    }
+
     $db = $ex['db'];
     $scratch = "scratch_$db";
     $idx = $file !== null ? chainIndex($db, $file) : null;
@@ -1164,7 +1170,7 @@ function cmdAutograding(): int
     $tests = [];
     foreach (exercises() as $id => $ex) {
         $tests[] = ['name' => $id, 'setup' => '', 'run' => "./sql check $id", 'input' => '', 'output' => "PASS $id",
-            'comparison' => 'included', 'timeout' => 2, 'points' => 1];
+            'comparison' => 'included', 'timeout' => 10, 'points' => 1];
     }
     $path = realpath(ROOT) . '/.github/classroom/autograding.json';
     @mkdir(dirname($path), 0777, true);

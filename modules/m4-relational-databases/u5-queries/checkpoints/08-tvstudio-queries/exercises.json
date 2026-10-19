@@ -1,0 +1,72 @@
+{
+    "checkpoint": "m4u5-cp08",
+    "title": "Querying tvstudio",
+    "exercises": [
+        {
+            "id": "m4u5-08-topup",
+            "type": "script",
+            "db": "tvstudio",
+            "file": "/db/tvstudio/tvstudio-topup.sql",
+            "twice": true,
+            "assert": [
+                {
+                    "sql": "SELECT COUNT(*) FROM Series WHERE name IN ('Night Desk', 'Coming Soon')",
+                    "equals": "2",
+                    "say": "new series"
+                },
+                {
+                    "sql": "SELECT COUNT(*) FROM Director WHERE name = 'Rita' AND surname = 'Azzopardi'",
+                    "equals": "1",
+                    "say": "Rita Azzopardi"
+                },
+                {
+                    "sql": "SELECT COUNT(*) FROM Station WHERE CHAR_LENGTH(name) > 50",
+                    "equals": "1",
+                    "say": "stations with names over 50 characters"
+                }
+            ],
+            "hint": "Run ./sql shell tvstudio < db/tvstudio/tvstudio-topup.sql twice by hand, and compare the row counts."
+        },
+        {
+            "id": "m4u5-08-q1",
+            "type": "query",
+            "db": "tvstudio",
+            "file": "answers/q1_episodes_per_series.sql",
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA4LCBxMS4gV3JpdGUgb25lIFNFTEVDVCBzdGF0ZW1lbnQgYmVsb3cuClNFTEVDVCBTZXJpZXMubmFtZSwgQ09VTlQoRXBpc29kZS5pZCkgQVMgZXBpc29kZXMKRlJPTSBTZXJpZXMKICAgIExFRlQgSk9JTiBFcGlzb2RlIE9OIEVwaXNvZGUuc2VyaWVzSWQgPSBTZXJpZXMuaWQKR1JPVVAgQlkgU2VyaWVzLmlkLCBTZXJpZXMubmFtZTsK",
+            "hint": "Start FROM Series and LEFT JOIN Episode, so a series with no episodes shows 0."
+        },
+        {
+            "id": "m4u5-08-q2",
+            "type": "query",
+            "db": "tvstudio",
+            "file": "answers/q2_actors_in_several_series.sql",
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA4LCBxMi4gV3JpdGUgb25lIFNFTEVDVCBzdGF0ZW1lbnQgYmVsb3cuClNFTEVDVCBBY3Rvci5uYW1lLCBBY3Rvci5zdXJuYW1lLCBDT1VOVChTZXJpZXNBY3Rvci5zZXJpZXNJZCkgQVMgc2VyaWVzCkZST00gQWN0b3IKICAgIEpPSU4gU2VyaWVzQWN0b3IgT04gU2VyaWVzQWN0b3IuYWN0b3JJZCA9IEFjdG9yLmlkCkdST1VQIEJZIEFjdG9yLmlkLCBBY3Rvci5uYW1lLCBBY3Rvci5zdXJuYW1lCkhBVklORyBDT1VOVChTZXJpZXNBY3Rvci5zZXJpZXNJZCkgPiAxOwo=",
+            "hint": "GROUP BY the actor, then HAVING COUNT(...) > 1."
+        },
+        {
+            "id": "m4u5-08-q3",
+            "type": "query",
+            "db": "tvstudio",
+            "file": "answers/q3_directors_without_episodes.sql",
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA4LCBxMy4gV3JpdGUgb25lIFNFTEVDVCBzdGF0ZW1lbnQgYmVsb3cuClNFTEVDVCBEaXJlY3Rvci5uYW1lLCBEaXJlY3Rvci5zdXJuYW1lCkZST00gRGlyZWN0b3IKICAgIExFRlQgSk9JTiBFcGlzb2RlIE9OIEVwaXNvZGUuZGlyZWN0b3JJZCA9IERpcmVjdG9yLmlkCldIRVJFIEVwaXNvZGUuaWQgSVMgTlVMTDsK",
+            "hint": "LEFT JOIN Episode, then WHERE Episode.id IS NULL."
+        },
+        {
+            "id": "m4u5-08-q4",
+            "type": "query",
+            "db": "tvstudio",
+            "file": "answers/q4_series_never_transmitted.sql",
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA4LCBxNC4gV3JpdGUgb25lIFNFTEVDVCBzdGF0ZW1lbnQgYmVsb3cuClNFTEVDVCBTZXJpZXMubmFtZQpGUk9NIFNlcmllcwpXSEVSRSBOT1QgRVhJU1RTICgKICAgIFNFTEVDVCAxCiAgICBGUk9NIEVwaXNvZGUKICAgICAgICBKT0lOIFRyYW5zbWlzc2lvbiBPTiBUcmFuc21pc3Npb24uZXBpc29kZUlkID0gRXBpc29kZS5pZAogICAgV0hFUkUgRXBpc29kZS5zZXJpZXNJZCA9IFNlcmllcy5pZAopOwo=",
+            "hint": "NOT EXISTS, with a sub-query joining Episode and Transmission."
+        },
+        {
+            "id": "m4u5-08-q5",
+            "type": "query",
+            "db": "tvstudio",
+            "file": "answers/q5_transmissions_per_station_month.sql",
+            "ordered": true,
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA4LCBxNS4gV3JpdGUgb25lIFNFTEVDVCBzdGF0ZW1lbnQgYmVsb3cuClNFTEVDVAogICAgU3RhdGlvbi5uYW1lLAogICAgREFURV9GT1JNQVQoVHJhbnNtaXNzaW9uLmFpckRhdGVUaW1lLCAnJVktJW0nKSBBUyBtb250aCwKICAgIENPVU5UKCopIEFTIHRyYW5zbWlzc2lvbnMKRlJPTSBTdGF0aW9uCiAgICBKT0lOIFRyYW5zbWlzc2lvbiBPTiBUcmFuc21pc3Npb24uc3RhdGlvbklkID0gU3RhdGlvbi5pZApHUk9VUCBCWSBTdGF0aW9uLmlkLCBTdGF0aW9uLm5hbWUsIERBVEVfRk9STUFUKFRyYW5zbWlzc2lvbi5haXJEYXRlVGltZSwgJyVZLSVtJykKT1JERVIgQlkgU3RhdGlvbi5uYW1lLCBtb250aDsK",
+            "hint": "DATE_FORMAT(Transmission.airDateTime, '%Y-%m') gives the month. Order by station name, then month."
+        }
+    ]
+}

@@ -1,0 +1,674 @@
+{
+    "tests": [
+        {
+            "name": "m4u4-01-predict",
+            "setup": "",
+            "run": "./sql check m4u4-01-predict",
+            "input": "",
+            "output": "PASS m4u4-01-predict",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-01-add",
+            "setup": "",
+            "run": "./sql check m4u4-01-add",
+            "input": "",
+            "output": "PASS m4u4-01-add",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-01-change",
+            "setup": "",
+            "run": "./sql check m4u4-01-change",
+            "input": "",
+            "output": "PASS m4u4-01-change",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-01-drop",
+            "setup": "",
+            "run": "./sql check m4u4-01-drop",
+            "input": "",
+            "output": "PASS m4u4-01-drop",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-02-breakit-fk",
+            "setup": "",
+            "run": "./sql check m4u4-02-breakit-fk",
+            "input": "",
+            "output": "PASS m4u4-02-breakit-fk",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-02-create",
+            "setup": "",
+            "run": "./sql check m4u4-02-create",
+            "input": "",
+            "output": "PASS m4u4-02-create",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-02-add-fk",
+            "setup": "",
+            "run": "./sql check m4u4-02-add-fk",
+            "input": "",
+            "output": "PASS m4u4-02-add-fk",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-02-drop-right-table",
+            "setup": "",
+            "run": "./sql check m4u4-02-drop-right-table",
+            "input": "",
+            "output": "PASS m4u4-02-drop-right-table",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-03-breakit-length",
+            "setup": "",
+            "run": "./sql check m4u4-03-breakit-length",
+            "input": "",
+            "output": "PASS m4u4-03-breakit-length",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-03-predict",
+            "setup": "",
+            "run": "./sql check m4u4-03-predict",
+            "input": "",
+            "output": "PASS m4u4-03-predict",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-03-vendor",
+            "setup": "",
+            "run": "./sql check m4u4-03-vendor",
+            "input": "",
+            "output": "PASS m4u4-03-vendor",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-04-breakit-truncate",
+            "setup": "",
+            "run": "./sql check m4u4-04-breakit-truncate",
+            "input": "",
+            "output": "PASS m4u4-04-breakit-truncate",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-04-truncate-safe",
+            "setup": "",
+            "run": "./sql check m4u4-04-truncate-safe",
+            "input": "",
+            "output": "PASS m4u4-04-truncate-safe",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-04-drop",
+            "setup": "",
+            "run": "./sql check m4u4-04-drop",
+            "input": "",
+            "output": "PASS m4u4-04-drop",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-05-breakit-delete",
+            "setup": "",
+            "run": "./sql check m4u4-05-breakit-delete",
+            "input": "",
+            "output": "PASS m4u4-05-breakit-delete",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-05-actions",
+            "setup": "",
+            "run": "./sql check m4u4-05-actions",
+            "input": "",
+            "output": "PASS m4u4-05-actions",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-05-delete-lucy",
+            "setup": "",
+            "run": "./sql check m4u4-05-delete-lucy",
+            "input": "",
+            "output": "PASS m4u4-05-delete-lucy",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-05-on-update",
+            "setup": "",
+            "run": "./sql check m4u4-05-on-update",
+            "input": "",
+            "output": "PASS m4u4-05-on-update",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-06-checks",
+            "setup": "",
+            "run": "./sql check m4u4-06-checks",
+            "input": "",
+            "output": "PASS m4u4-06-checks",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-06-breakit-check",
+            "setup": "",
+            "run": "./sql check m4u4-06-breakit-check",
+            "input": "",
+            "output": "PASS m4u4-06-breakit-check",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-07-preflight",
+            "setup": "",
+            "run": "./sql check m4u4-07-preflight",
+            "input": "",
+            "output": "PASS m4u4-07-preflight",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-07-migration",
+            "setup": "",
+            "run": "./sql check m4u4-07-migration",
+            "input": "",
+            "output": "PASS m4u4-07-migration",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-07-alter-only",
+            "setup": "",
+            "run": "./sql check m4u4-07-alter-only",
+            "input": "",
+            "output": "PASS m4u4-07-alter-only",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-07-behaviour",
+            "setup": "",
+            "run": "./sql check m4u4-07-behaviour",
+            "input": "",
+            "output": "PASS m4u4-07-behaviour",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-07-decisions",
+            "setup": "",
+            "run": "./sql check m4u4-07-decisions",
+            "input": "",
+            "output": "PASS m4u4-07-decisions",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-08-iceadmin-sync",
+            "setup": "",
+            "run": "./sql check m4u4-08-iceadmin-sync",
+            "input": "",
+            "output": "PASS m4u4-08-iceadmin-sync",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u4-08-tvstudio-sync",
+            "setup": "",
+            "run": "./sql check m4u4-08-tvstudio-sync",
+            "input": "",
+            "output": "PASS m4u4-08-tvstudio-sync",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-01-pos-dbml",
+            "setup": "",
+            "run": "./sql check m4u5-01-pos-dbml",
+            "input": "",
+            "output": "PASS m4u5-01-pos-dbml",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-01-warmup-1",
+            "setup": "",
+            "run": "./sql check m4u5-01-warmup-1",
+            "input": "",
+            "output": "PASS m4u5-01-warmup-1",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-01-warmup-2",
+            "setup": "",
+            "run": "./sql check m4u5-01-warmup-2",
+            "input": "",
+            "output": "PASS m4u5-01-warmup-2",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-01-warmup-3",
+            "setup": "",
+            "run": "./sql check m4u5-01-warmup-3",
+            "input": "",
+            "output": "PASS m4u5-01-warmup-3",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-02-5.1.1",
+            "setup": "",
+            "run": "./sql check m4u5-02-5.1.1",
+            "input": "",
+            "output": "PASS m4u5-02-5.1.1",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-02-5.1.2",
+            "setup": "",
+            "run": "./sql check m4u5-02-5.1.2",
+            "input": "",
+            "output": "PASS m4u5-02-5.1.2",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-02-5.1.3",
+            "setup": "",
+            "run": "./sql check m4u5-02-5.1.3",
+            "input": "",
+            "output": "PASS m4u5-02-5.1.3",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-02-5.1.4",
+            "setup": "",
+            "run": "./sql check m4u5-02-5.1.4",
+            "input": "",
+            "output": "PASS m4u5-02-5.1.4",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-03-breakit-group",
+            "setup": "",
+            "run": "./sql check m4u5-03-breakit-group",
+            "input": "",
+            "output": "PASS m4u5-03-breakit-group",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-03-breakit-group-by",
+            "setup": "",
+            "run": "./sql check m4u5-03-breakit-group-by",
+            "input": "",
+            "output": "PASS m4u5-03-breakit-group-by",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-03-scalar",
+            "setup": "",
+            "run": "./sql check m4u5-03-scalar",
+            "input": "",
+            "output": "PASS m4u5-03-scalar",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-03-alias",
+            "setup": "",
+            "run": "./sql check m4u5-03-alias",
+            "input": "",
+            "output": "PASS m4u5-03-alias",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-04-predict",
+            "setup": "",
+            "run": "./sql check m4u5-04-predict",
+            "input": "",
+            "output": "PASS m4u5-04-predict",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-04-inner",
+            "setup": "",
+            "run": "./sql check m4u5-04-inner",
+            "input": "",
+            "output": "PASS m4u5-04-inner",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-04-left",
+            "setup": "",
+            "run": "./sql check m4u5-04-left",
+            "input": "",
+            "output": "PASS m4u5-04-left",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-04-right",
+            "setup": "",
+            "run": "./sql check m4u5-04-right",
+            "input": "",
+            "output": "PASS m4u5-04-right",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-04-full",
+            "setup": "",
+            "run": "./sql check m4u5-04-full",
+            "input": "",
+            "output": "PASS m4u5-04-full",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-04-bridge-inner",
+            "setup": "",
+            "run": "./sql check m4u5-04-bridge-inner",
+            "input": "",
+            "output": "PASS m4u5-04-bridge-inner",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-04-bridge-left",
+            "setup": "",
+            "run": "./sql check m4u5-04-bridge-left",
+            "input": "",
+            "output": "PASS m4u5-04-bridge-left",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-04-lucy",
+            "setup": "",
+            "run": "./sql check m4u5-04-lucy",
+            "input": "",
+            "output": "PASS m4u5-04-lucy",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-05-leave-subquery",
+            "setup": "",
+            "run": "./sql check m4u5-05-leave-subquery",
+            "input": "",
+            "output": "PASS m4u5-05-leave-subquery",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-05-column-subquery",
+            "setup": "",
+            "run": "./sql check m4u5-05-column-subquery",
+            "input": "",
+            "output": "PASS m4u5-05-column-subquery",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-05-left-join-equivalent",
+            "setup": "",
+            "run": "./sql check m4u5-05-left-join-equivalent",
+            "input": "",
+            "output": "PASS m4u5-05-left-join-equivalent",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-06-5.2.1",
+            "setup": "",
+            "run": "./sql check m4u5-06-5.2.1",
+            "input": "",
+            "output": "PASS m4u5-06-5.2.1",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-06-5.2.2",
+            "setup": "",
+            "run": "./sql check m4u5-06-5.2.2",
+            "input": "",
+            "output": "PASS m4u5-06-5.2.2",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-06-5.2.3",
+            "setup": "",
+            "run": "./sql check m4u5-06-5.2.3",
+            "input": "",
+            "output": "PASS m4u5-06-5.2.3",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-06-5.2.4",
+            "setup": "",
+            "run": "./sql check m4u5-06-5.2.4",
+            "input": "",
+            "output": "PASS m4u5-06-5.2.4",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-06-5.2.5",
+            "setup": "",
+            "run": "./sql check m4u5-06-5.2.5",
+            "input": "",
+            "output": "PASS m4u5-06-5.2.5",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-06-5.2.6",
+            "setup": "",
+            "run": "./sql check m4u5-06-5.2.6",
+            "input": "",
+            "output": "PASS m4u5-06-5.2.6",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-07-5.3.1",
+            "setup": "",
+            "run": "./sql check m4u5-07-5.3.1",
+            "input": "",
+            "output": "PASS m4u5-07-5.3.1",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-07-5.3.2",
+            "setup": "",
+            "run": "./sql check m4u5-07-5.3.2",
+            "input": "",
+            "output": "PASS m4u5-07-5.3.2",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-07-5.3.3",
+            "setup": "",
+            "run": "./sql check m4u5-07-5.3.3",
+            "input": "",
+            "output": "PASS m4u5-07-5.3.3",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-07-5.3.4",
+            "setup": "",
+            "run": "./sql check m4u5-07-5.3.4",
+            "input": "",
+            "output": "PASS m4u5-07-5.3.4",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-07-5.3.5",
+            "setup": "",
+            "run": "./sql check m4u5-07-5.3.5",
+            "input": "",
+            "output": "PASS m4u5-07-5.3.5",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-08-topup",
+            "setup": "",
+            "run": "./sql check m4u5-08-topup",
+            "input": "",
+            "output": "PASS m4u5-08-topup",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-08-q1",
+            "setup": "",
+            "run": "./sql check m4u5-08-q1",
+            "input": "",
+            "output": "PASS m4u5-08-q1",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-08-q2",
+            "setup": "",
+            "run": "./sql check m4u5-08-q2",
+            "input": "",
+            "output": "PASS m4u5-08-q2",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-08-q3",
+            "setup": "",
+            "run": "./sql check m4u5-08-q3",
+            "input": "",
+            "output": "PASS m4u5-08-q3",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-08-q4",
+            "setup": "",
+            "run": "./sql check m4u5-08-q4",
+            "input": "",
+            "output": "PASS m4u5-08-q4",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        },
+        {
+            "name": "m4u5-08-q5",
+            "setup": "",
+            "run": "./sql check m4u5-08-q5",
+            "input": "",
+            "output": "PASS m4u5-08-q5",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1
+        }
+    ]
+}
