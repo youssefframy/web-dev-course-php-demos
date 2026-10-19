@@ -1,0 +1,4 @@
+-- Unit 5, checkpoint 01, warmup-1. Write one SELECT statement below.
+SELECT Client.surname, Client.name
+FROM Client
+ORDER BY Client.surname, Client.name;

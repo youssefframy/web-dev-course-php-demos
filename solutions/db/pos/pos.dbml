@@ -1,0 +1,116 @@
+Table "Cashier" {
+  "id" int(11) [pk, not null, increment]
+  "name" varchar(20) [not null]
+  "surname" varchar(20) [not null]
+}
+
+Table "Category" {
+  "id" int(11) [pk, not null, increment]
+  "catCode" varchar(9) [not null]
+  "catName" varchar(20) [not null]
+  "description" varchar(200)
+
+  Indexes {
+    catCode [unique, name: "catCode"]
+    catName [unique, name: "catName"]
+  }
+}
+
+Table "Client" {
+  "id" int(11) [pk, not null, increment]
+  "name" varchar(20) [not null]
+  "surname" varchar(20) [not null]
+}
+
+Table "Invoice" {
+  "id" int(11) [pk, not null, increment]
+  "total" decimal(10,2) [not null]
+  "cashierId" int(11) [not null]
+  "clientId" int(11) [not null]
+  "issueTime" datetime [not null, default: `current_timestamp()`]
+
+  Indexes {
+    cashierId [name: "c_invoice_cashier"]
+    clientId [name: "c_invoice_client"]
+  }
+}
+
+Table "InvoiceItem" {
+  "id" int(11) [pk, not null, increment]
+  "invoiceId" int(11) [not null]
+  "unitPrice" decimal(10,2) [not null]
+  "qty" int(11) [not null, default: 1]
+  "itemId" int(11) [not null]
+
+  Indexes {
+    invoiceId [name: "c_invoiceitem_invoice"]
+    itemId [name: "c_invoiceitem_item"]
+  }
+}
+
+Table "Item" {
+  "id" int(11) [pk, not null, increment]
+  "stockCode" varchar(15) [not null]
+  "name" varchar(60) [not null]
+  "description" varchar(200) [not null]
+  "price" decimal(10,2) [not null]
+  "categoryId" int(11) [not null]
+
+  Indexes {
+    stockCode [unique, name: "stockCode"]
+    categoryId [name: "c_item_category"]
+  }
+}
+
+Table "Payment" {
+  "id" int(11) [pk, not null, increment]
+  "issueTime" datetime [not null, default: `current_timestamp()`]
+  "cashierId" int(11) [not null]
+  "clientId" int(11) [not null]
+  "paymentTypeId" int(11) [not null]
+  "total" decimal(10,2) [not null]
+
+  Indexes {
+    cashierId [name: "c_payment_cashier"]
+    clientId [name: "c_payment_client"]
+    paymentTypeId [name: "c_payment_paymenttype"]
+  }
+}
+
+Table "PaymentAllocation" {
+  "id" int(11) [pk, not null, increment]
+  "paymentId" int(11) [not null]
+  "invoiceItemId" int(11) [not null]
+  "amount" decimal(10,2) [not null]
+
+  Indexes {
+    paymentId [name: "c_paymentallocation_payment"]
+    invoiceItemId [name: "c_paymentallocation_invoiceitem"]
+  }
+}
+
+Table "PaymentType" {
+  "id" int(11) [pk, not null, increment]
+  "typeName" varchar(20) [not null]
+}
+
+Ref "c_invoice_cashier":"Cashier"."id" <? "Invoice"."cashierId" [update: cascade]
+
+Ref "c_invoice_client":"Client"."id" <? "Invoice"."clientId" [update: cascade]
+
+Ref "c_invoiceitem_invoice":"Invoice"."id" <? "InvoiceItem"."invoiceId"
+
+Ref "c_invoiceitem_item":"Item"."id" <? "InvoiceItem"."itemId"
+
+Ref "c_item_category":"Category"."id" <? "Item"."categoryId" [update: cascade]
+
+Ref "c_payment_cashier":"Cashier"."id" <? "Payment"."cashierId" [update: cascade]
+
+Ref "c_payment_client":"Client"."id" <? "Payment"."clientId" [update: cascade]
+
+Ref "c_payment_paymenttype":"PaymentType"."id" <? "Payment"."paymentTypeId" [update: cascade]
+
+Ref "c_paymentallocation_invoiceitem":"InvoiceItem"."id" <? "PaymentAllocation"."invoiceItemId"
+
+Ref "c_paymentallocation_payment":"Payment"."id" <? "PaymentAllocation"."paymentId"
+

@@ -1,0 +1,72 @@
+// iceadmin, the physical design. Paste into https://dbdiagram.io to see the diagram.
+// Keep this file in step with the database: ./sql drift iceadmin compares the two.
+
+Project iceadmin {
+  database_type: 'MySQL'
+  Note: 'ICE Malta employees, departments and salary history.'
+}
+
+Enum basis {
+  PT
+  FT
+}
+
+Table Employee {
+  id INT [pk, increment, not null]
+  name VARCHAR(25) [not null]
+  surname VARCHAR(30) [not null]
+  jobTitle VARCHAR(15) [not null]
+  basis basis [default: 'FT']
+}
+
+Table Department {
+  id INT [pk, increment, not null]
+  name VARCHAR(20) [not null]
+}
+
+Table Salary {
+  id INT [pk, increment, not null]
+  fromDate DATE [not null]
+  toDate DATE [null, note: 'NULL means this is the current salary']
+  amount DECIMAL(10,2) [not null]
+  employeeId INT [not null]
+
+  checks {
+    `amount > 0` [name: 'c_salary_amount']
+  }
+}
+
+Table EmployeeDepartment {
+  id INT [pk, increment, not null]
+  employeeId INT [not null]
+  departmentId INT [not null]
+
+  indexes {
+    (employeeId, departmentId) [unique, name: 'uq_employeedepartment']
+  }
+}
+
+Table LeaveBooking {
+  id INT [pk, increment, not null]
+  dateFrom DATE [not null]
+  dateTo DATE [not null]
+  employeeId INT [not null]
+
+  checks {
+    `dateTo >= dateFrom` [name: 'c_leavebooking_dates']
+  }
+}
+
+Table Vendor {
+  id INT [pk, increment, not null]
+  name VARCHAR(50) [not null]
+  website VARCHAR(50) [not null]
+  country VARCHAR(30) [not null]
+  brandManager INT [null, note: 'NULL until a new brand manager is assigned']
+}
+
+Ref c_salary_employee: Salary.employeeId > Employee.id [update: cascade, delete: cascade]
+Ref c_employeedepartment_employee: EmployeeDepartment.employeeId > Employee.id [update: cascade, delete: cascade]
+Ref c_employeedepartment_department: EmployeeDepartment.departmentId > Department.id
+Ref c_leavebooking_employee: LeaveBooking.employeeId > Employee.id [update: cascade, delete: cascade]
+Ref c_vendor_employee: Vendor.brandManager > Employee.id [update: cascade, delete: set null]

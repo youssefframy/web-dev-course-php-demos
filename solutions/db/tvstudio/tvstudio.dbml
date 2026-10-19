@@ -1,0 +1,82 @@
+// tvstudio, the physical design from Exercise 2.4. Paste into https://dbdiagram.io to see the diagram.
+// Keep this file in step with the database: ./sql drift tvstudio compares the two.
+
+Project tvstudio {
+  database_type: 'MySQL'
+  Note: 'Series, episodes, cast, directors and the transmission schedule.'
+}
+
+Enum age_rating {
+  U
+  PG
+  "12"
+  "15"
+  "18"
+}
+
+Table Series {
+  id INT [pk, increment, not null]
+  name VARCHAR(100) [not null]
+}
+
+Table Actor {
+  id INT [pk, increment, not null]
+  name VARCHAR(50) [not null]
+  surname VARCHAR(50) [not null]
+  dateOfBirth DATE [null]
+}
+
+Table SeriesActor {
+  id INT [pk, increment, not null]
+  seriesId INT [not null]
+  actorId INT [not null]
+
+  indexes {
+    (seriesId, actorId) [unique, name: 'UQ_SeriesActor']
+  }
+}
+
+Table Director {
+  id INT [pk, increment, not null]
+  name VARCHAR(50) [not null]
+  surname VARCHAR(50) [not null]
+  dateOfBirth DATE [null]
+}
+
+Table Episode {
+  id INT [pk, increment, not null]
+  season SMALLINT [not null, default: 1]
+  number SMALLINT [not null]
+  title VARCHAR(100) [not null]
+  seriesId INT [not null]
+  directorId INT [null, note: 'NULL when the director has been deleted']
+  runtimeMinutes "SMALLINT UNSIGNED" [null]
+  ageRating age_rating [null]
+
+  indexes {
+    (seriesId, season, number) [unique, name: 'UQ_Episode_number']
+  }
+}
+
+Table Station {
+  id INT [pk, increment, not null]
+  name VARCHAR(100) [not null, unique]
+}
+
+Table Transmission {
+  id INT [pk, increment, not null]
+  airDateTime DATETIME [not null]
+  episodeId INT [not null]
+  stationId INT [not null]
+
+  indexes {
+    (stationId, airDateTime) [unique, name: 'UQ_Transmission_slot']
+  }
+}
+
+Ref FK_Series_TO_SeriesActor: SeriesActor.seriesId > Series.id [update: cascade, delete: cascade]
+Ref FK_Actor_TO_SeriesActor: SeriesActor.actorId > Actor.id
+Ref FK_Series_TO_Episode: Episode.seriesId > Series.id [update: cascade, delete: cascade]
+Ref FK_Director_TO_Episode: Episode.directorId > Director.id [update: cascade, delete: set null]
+Ref FK_Episode_TO_Transmission: Transmission.episodeId > Episode.id [update: cascade, delete: cascade]
+Ref FK_Station_TO_Transmission: Transmission.stationId > Station.id

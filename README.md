@@ -67,6 +67,8 @@ From Unit 4 onwards, your databases build up over the course. The files that bui
 
 Each check runs on a scratch copy, so checking never changes your databases. If you are stuck, `./sql reset` gives you a correct starting point for the next unit.
 
+Reference answers are in `solutions/`, at the same path as each file you work on. Try each exercise yourself first. `solutions/README.md` explains how to use them.
+
 ## How to submit
 
 Your instructor will send you a GitHub Classroom link. Accepting it creates your own copy of this repository. Clone that copy and do your work in it.

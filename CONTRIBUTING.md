@@ -72,10 +72,14 @@ After changing a chain step, regenerate the snapshots that follow it and run `co
 
 ## Solutions
 
-Solutions never go in this repository. They live in the private `ice-bed-solutions` repository, which mirrors these paths. Each solution has a Mermaid diagram, a `schema.sql` that passes `scripts/validate.sh`, and a `NOTES.md` that covers design decisions and acceptable alternatives. Validate them with:
+Solutions are written in the `ice-bed-solutions` repository, which mirrors these paths and runs the continuity test. Students see a copy in `solutions/` here, as a reference. Each Unit 2 solution has a Mermaid diagram, a `schema.sql` that passes `scripts/validate.sh`, and a `NOTES.md` that covers design decisions and acceptable alternatives. From Unit 4, solutions are the files `./sql` checks.
+
+Change a solution in `ice-bed-solutions` first, then refresh the copy here:
 
 ```sh
-scripts/validate.sh ../ice-bed-solutions/modules
+rsync -a --delete --exclude .DS_Store ../ice-bed-solutions/db ../ice-bed-solutions/modules solutions/
+SOLUTIONS=solutions ./sql check --all
+scripts/validate.sh solutions/modules
 ```
 
 ## Commits and tags
