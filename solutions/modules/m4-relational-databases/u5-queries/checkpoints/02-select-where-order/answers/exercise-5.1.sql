@@ -1,7 +1,7 @@
 -- Exercise 5.1: all four answers, ready to run.
 -- Run on the POS database:
 --   ./sql reset pos
---   ./sql shell pos < solutions/modules/m4-relational-databases/u5-queries/checkpoints/02-select-where-order/exercise-5.1.sql
+--   ./sql shell pos < solutions/modules/m4-relational-databases/u5-queries/checkpoints/02-select-where-order/answers/exercise-5.1.sql
 -- Or open it in SQLTools and run one statement at a time.
 -- The expected results match the slide, and were checked on mariadb:11.4.13.
 

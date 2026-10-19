@@ -28,10 +28,10 @@ Write each answer in its file under `answers/`, then run `./sql check m4u5-cp02`
 3. `5.1.3.sql`: the total of all sales, as one value named `TotalSales`.
 4. `5.1.4.sql`: the total of payments received on each day, oldest day first. The slides' question asks for a grand total "sorted by date", and their answer has no `ORDER BY`. This version asks for daily totals in date order, which is what the answer was trying to do.
 
-When you have tried all four, compare with the reference: `solutions/modules/m4-relational-databases/u5-queries/checkpoints/02-select-where-order/exercise-5.1.sql`. It has every answer and its expected result, and runs in one go:
+When you have tried all four, compare with the reference: `solutions/modules/m4-relational-databases/u5-queries/checkpoints/02-select-where-order/answers/exercise-5.1.sql`. It has every answer and its expected result, and runs in one go:
 
 ```sh
-./sql shell pos < solutions/modules/m4-relational-databases/u5-queries/checkpoints/02-select-where-order/exercise-5.1.sql
+./sql shell pos < solutions/modules/m4-relational-databases/u5-queries/checkpoints/02-select-where-order/answers/exercise-5.1.sql
 ```
 
 ## Done when
