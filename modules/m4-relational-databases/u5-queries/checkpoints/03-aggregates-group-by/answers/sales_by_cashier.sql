@@ -1,0 +1,1 @@
+-- Unit 5, checkpoint 03, alias. Write one SELECT statement below.

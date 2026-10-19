@@ -1,0 +1,1 @@
+-- Unit 5, checkpoint 03, scalar. Write one SELECT statement below.

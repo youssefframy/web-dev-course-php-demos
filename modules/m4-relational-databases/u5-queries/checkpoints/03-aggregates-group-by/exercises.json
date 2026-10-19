@@ -1,0 +1,42 @@
+{
+    "checkpoint": "m4u5-cp03",
+    "title": "Aggregates and GROUP BY",
+    "exercises": [
+        {
+            "id": "m4u5-03-breakit-group",
+            "type": "error",
+            "db": "pos",
+            "file": "answers/break_no_group_by.sql",
+            "expect": 1140,
+            "hint": "The slides' first attempt: cashierId and SUM(total), with no GROUP BY."
+        },
+        {
+            "id": "m4u5-03-breakit-group-by",
+            "type": "error",
+            "db": "pos",
+            "file": "answers/break_missing_column.sql",
+            "expect": 1055,
+            "hint": "Select cashierId, issueTime and SUM(total), but GROUP BY cashierId only."
+        },
+        {
+            "id": "m4u5-03-scalar",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/average_invoice.sql",
+            "columns": true,
+            "hash": "0a655f742d5a4cc7ac45a10b5794511b66c84e842b669bcf05f5182b87a0b05d",
+            "hint": "CONCAT('€', ROUND(AVG(...), 2)) AS averageInvoice",
+            "rows": 1
+        },
+        {
+            "id": "m4u5-03-alias",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/sales_by_cashier.sql",
+            "columns": true,
+            "hash": "1ab84d1f98cf570af1198d59e126c84edcea026709f1575e1924e68a8adcd5db",
+            "hint": "An alias with a space goes in quotes: AS 'Total Sales'",
+            "rows": 2
+        }
+    ]
+}

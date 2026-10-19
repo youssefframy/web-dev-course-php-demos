@@ -1,0 +1,1 @@
+-- Unit 5, checkpoint 03, breakit-group-by. This query should fail. It runs on a scratch copy.
