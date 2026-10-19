@@ -1,0 +1,1 @@
+-- Unit 4, checkpoint 02, step 3. Create LeaveBooking, insert the valid rows, then add the foreign key.

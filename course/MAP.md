@@ -16,6 +16,7 @@ Three databases run through Module 4. Each unit starts where the previous one en
 | m4u3 (base) | iceadmin | Employee, Department, Salary, EmployeeDepartment created and filled | `snapshots/iceadmin/after-m4u3.sql` |
 | m4u3 (base) | tvstudio | Series, Actor, SeriesActor, Director, Episode, Station, Transmission created and filled | `snapshots/tvstudio/after-m4u3.sql` |
 | m4u4-cp01 | iceadmin | Employee: employmentStart added, changed, dropped (no net change) | `db/iceadmin/u4_01_*.sql` |
+| m4u4-cp02 | iceadmin | LeaveBooking created with 5 rows; c_leavebooking_employee added | `db/iceadmin/u4_02_leavebooking.sql` |
 
 ## Snapshots
 

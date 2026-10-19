@@ -1,0 +1,50 @@
+{
+  "checkpoint": "m4u4-cp02",
+  "title": "LeaveBooking",
+  "exercises": [
+    {
+      "id": "m4u4-02-breakit-fk",
+      "type": "error",
+      "db": "iceadmin",
+      "file": "answers/break_fk.sql",
+      "after": "m4u4-cp01",
+      "expect": 1452,
+      "hint": "Create the table without the foreign key, insert all six rows including employee 4, then ALTER TABLE LeaveBooking ADD CONSTRAINT ..."
+    },
+    {
+      "id": "m4u4-02-create",
+      "type": "script",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_02_leavebooking.sql",
+      "assert": [
+        {"column": "LeaveBooking.dateFrom", "type": "date", "null": false},
+        {"column": "LeaveBooking.dateTo", "type": "date", "null": false},
+        {"column": "LeaveBooking.employeeId", "type": "int", "null": false},
+        {"sql": "SELECT employeeId, dateFrom, dateTo FROM LeaveBooking ORDER BY employeeId, dateFrom", "equals": "1, 2024-02-01, 2024-02-03 | 2, 2024-01-01, 2024-01-02 | 2, 2024-08-12, 2024-08-16 | 3, 2023-12-27, 2023-12-29 | 3, 2024-03-01, 2024-03-15", "say": "LeaveBooking rows"}
+      ],
+      "hint": "Insert exactly the five rows in the README table. Leave out the booking for employee 4."
+    },
+    {
+      "id": "m4u4-02-add-fk",
+      "type": "structure",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_02_leavebooking.sql",
+      "assert": [
+        {"fk": "LeaveBooking.employeeId -> Employee.id", "update": "RESTRICT", "delete": "RESTRICT"},
+        {"sql": "SELECT CONSTRAINT_NAME FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_SCHEMA = DATABASE() AND TABLE_NAME = 'LeaveBooking'", "equals": "c_leavebooking_employee", "say": "constraint name"}
+      ],
+      "hint": "ALTER TABLE LeaveBooking ADD CONSTRAINT c_leavebooking_employee FOREIGN KEY (employeeId) REFERENCES Employee (id);"
+    },
+    {
+      "id": "m4u4-02-drop-right-table",
+      "type": "script",
+      "db": "iceadmin",
+      "file": "answers/drop_constraint.sql",
+      "assert": [
+        {"no_fk": "LeaveBooking.employeeId -> Employee.id"},
+        {"table": "LeaveBooking"}
+      ],
+      "hint": "The constraint was declared on LeaveBooking, so it is LeaveBooking you alter."
+    }
+  ]
+}

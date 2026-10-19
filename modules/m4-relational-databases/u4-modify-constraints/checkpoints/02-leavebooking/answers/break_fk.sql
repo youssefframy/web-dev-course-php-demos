@@ -1,0 +1,2 @@
+-- Unit 4, checkpoint 02, step 2. This runs on a scratch copy, never on your iceadmin.
+-- Create LeaveBooking, insert the rows including the one for employee 4, then add the foreign key.
