@@ -39,6 +39,7 @@ Three databases run through Module 4. Each unit starts where the previous one en
 | `snapshots/tvstudio/after-m4u5.sql` | `./sql reset tvstudio --at m4u5` |
 | `seeds/pos.sql` | `./sql reset pos` |
 | `seeds/joinlab.sql` | `./sql reset joinlab` |
+| `seeds/pos-demo.sql` | Extra POS rows for demonstrations: `./sql shell pos < seeds/pos-demo.sql`. Never used by the checks |
 
 ## Decisions
 
@@ -52,4 +53,4 @@ Three databases run through Module 4. Each unit starts where the previous one en
 - The Unit 4 demonstrations that would change ids or remove the foreign key (ON UPDATE CASCADE, and dropping `c_leavebooking_employee`) run on scratch copies, so the chain is not affected.
 - Vendor ids are 1 to 4 after a rebuild. A student who ran the failing insert by hand sees 5 to 8 until they rebuild. No later query depends on Vendor ids.
 - Unit 5 uses U4's column names, `dateFrom` and `dateTo`. The U5 slides' sub-query uses `fromDate` and `toDate`.
-- - `seeds/pos.sql` keeps the gist's data exactly, including the typos "Forkes" and "Refridgeration", so results match the slides.
+- `seeds/pos.sql` keeps the gist's data exactly, including the typos "Forkes" and "Refridgeration", so results match the slides.
