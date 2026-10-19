@@ -1,0 +1,1 @@
+-- Unit 4, checkpoint 05, step 3. Allow NULL in Vendor.brandManager, re-create the four constraints, then delete Lucy.

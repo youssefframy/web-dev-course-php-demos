@@ -23,5 +23,6 @@ Your work goes in `db/iceadmin/` and `db/tvstudio/`. Each file there is one step
 | 02 | [LeaveBooking](checkpoints/02-leavebooking/README.md) | LeaveBooking created and linked to Employee |
 | 03 | [Vendor](checkpoints/03-vendor/README.md) | Vendor created after a failed insert |
 | 04 | [TRUNCATE and DROP](checkpoints/04-truncate-vs-drop/README.md) | Tables emptied and removed on a scratch copy |
+| 05 | [Referential actions](checkpoints/05-referential-actions/README.md) | CASCADE and SET NULL rules, and Lucy deleted |
 
 Back to [Module 4](../README.md).

@@ -1,0 +1,55 @@
+{
+  "checkpoint": "m4u4-cp05",
+  "title": "Referential actions",
+  "exercises": [
+    {
+      "id": "m4u4-05-breakit-delete",
+      "type": "error",
+      "db": "iceadmin",
+      "file": "answers/delete_lucy.sql",
+      "after": "m4u4-cp04",
+      "expect": 1451,
+      "hint": "DELETE FROM Employee WHERE id = 2;"
+    },
+    {
+      "id": "m4u4-05-actions",
+      "type": "structure",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_05_referential_actions.sql",
+      "assert": [
+        {"fk": "Salary.employeeId -> Employee.id", "update": "CASCADE", "delete": "CASCADE"},
+        {"fk": "EmployeeDepartment.employeeId -> Employee.id", "update": "CASCADE", "delete": "CASCADE"},
+        {"fk": "Vendor.brandManager -> Employee.id", "update": "CASCADE", "delete": "SET NULL"},
+        {"fk": "LeaveBooking.employeeId -> Employee.id", "update": "CASCADE", "delete": "CASCADE"},
+        {"fk": "EmployeeDepartment.departmentId -> Department.id", "update": "RESTRICT", "delete": "RESTRICT"},
+        {"column": "Vendor.brandManager", "type": "int", "null": true}
+      ],
+      "hint": "Drop each constraint, then add it back with ON UPDATE ... ON DELETE ... Vendor.brandManager must allow NULL first."
+    },
+    {
+      "id": "m4u4-05-delete-lucy",
+      "type": "script",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_05_referential_actions.sql",
+      "assert": [
+        {"sql": "SELECT id, name FROM Employee ORDER BY id", "equals": "1, Joe | 3, Fred", "say": "Employee rows"},
+        {"sql": "SELECT COUNT(*) FROM Salary WHERE employeeId = 2", "equals": "0", "say": "Lucy's salaries"},
+        {"sql": "SELECT COUNT(*) FROM EmployeeDepartment WHERE employeeId = 2", "equals": "0", "say": "Lucy's department links"},
+        {"sql": "SELECT COUNT(*) FROM LeaveBooking", "equals": "3", "say": "LeaveBooking rows left"},
+        {"sql": "SELECT name, COALESCE(brandManager, 'NULL') FROM Vendor ORDER BY name", "equals": "Adobe, 1 | Digital Marketing Institute, NULL | Linux Professional Institute, 3 | Microsoft, 3", "say": "Vendor brand managers"}
+      ],
+      "hint": "The last statement in the file is DELETE FROM Employee WHERE id = 2;"
+    },
+    {
+      "id": "m4u4-05-on-update",
+      "type": "script",
+      "db": "iceadmin",
+      "file": "answers/on_update.sql",
+      "assert": [
+        {"sql": "SELECT id FROM Employee WHERE name = 'Fred'", "equals": "30", "say": "Fred's id"},
+        {"sql": "SELECT (SELECT COUNT(*) FROM Salary WHERE employeeId = 30), (SELECT COUNT(*) FROM EmployeeDepartment WHERE employeeId = 30), (SELECT COUNT(*) FROM LeaveBooking WHERE employeeId = 30), (SELECT COUNT(*) FROM Vendor WHERE brandManager = 30)", "equals": "1, 2, 2, 2", "say": "rows pointing at 30 (Salary, EmployeeDepartment, LeaveBooking, Vendor)"}
+      ],
+      "hint": "UPDATE Employee SET id = 30 WHERE id = 3;"
+    }
+  ]
+}
