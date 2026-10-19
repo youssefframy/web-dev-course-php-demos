@@ -1,0 +1,1 @@
+-- Unit 5, checkpoint 05, leave-subquery. Write one SELECT statement below.

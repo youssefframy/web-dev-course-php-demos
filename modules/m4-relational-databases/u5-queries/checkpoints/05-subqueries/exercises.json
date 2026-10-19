@@ -1,0 +1,32 @@
+{
+    "checkpoint": "m4u5-cp05",
+    "title": "Sub-queries",
+    "exercises": [
+        {
+            "id": "m4u5-05-leave-subquery",
+            "type": "query",
+            "db": "iceadmin",
+            "file": "answers/leave_subquery.sql",
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA1LCBsZWF2ZS1zdWJxdWVyeS4gV3JpdGUgb25lIFNFTEVDVCBzdGF0ZW1lbnQgYmVsb3cuClNFTEVDVCBFbXBsb3llZS5uYW1lLCBFbXBsb3llZS5zdXJuYW1lLCBULmRhdGVGcm9tLCBULmRhdGVUbwpGUk9NIEVtcGxveWVlCiAgICBMRUZUIEpPSU4gKAogICAgICAgIFNFTEVDVCBMZWF2ZUJvb2tpbmcuZGF0ZUZyb20sIExlYXZlQm9va2luZy5kYXRlVG8sIExlYXZlQm9va2luZy5lbXBsb3llZUlkCiAgICAgICAgRlJPTSBMZWF2ZUJvb2tpbmcKICAgICAgICBXSEVSRSBMZWF2ZUJvb2tpbmcuZGF0ZUZyb20gPiAnMjAyNC0wMS0wMScKICAgICkgVCBPTiBULmVtcGxveWVlSWQgPSBFbXBsb3llZS5pZDsK",
+            "hint": "Use one alias, T, everywhere, and '2024-01-01' in single quotes."
+        },
+        {
+            "id": "m4u5-05-column-subquery",
+            "type": "query",
+            "db": "joinlab",
+            "file": "answers/column_subquery.sql",
+            "hash": "d0638edf87392cdf165e56f93f8a80aeb6cd8c1401dafe30eb73437455561534",
+            "hint": "(SELECT Department.name FROM Department WHERE Department.id = Employee.deptId) AS dept",
+            "rows": 5
+        },
+        {
+            "id": "m4u5-05-left-join-equivalent",
+            "type": "query",
+            "db": "joinlab",
+            "file": "answers/left_join_equivalent.sql",
+            "hash": "d0638edf87392cdf165e56f93f8a80aeb6cd8c1401dafe30eb73437455561534",
+            "hint": "The same columns, with a LEFT JOIN instead of the sub-query.",
+            "rows": 5
+        }
+    ]
+}

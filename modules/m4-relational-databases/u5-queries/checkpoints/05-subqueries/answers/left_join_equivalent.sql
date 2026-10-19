@@ -1,0 +1,1 @@
+-- Unit 5, checkpoint 05, left-join-equivalent. Write one SELECT statement below.
