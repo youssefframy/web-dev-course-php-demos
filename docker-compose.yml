@@ -2,9 +2,11 @@
 # The root password is for local practice only. Never reuse it anywhere real.
 services:
   db:
-    image: mariadb:11.4
+    image: mariadb:11.4.13
     environment:
       MARIADB_ROOT_PASSWORD: root
+    # The server's default modes, plus ONLY_FULL_GROUP_BY (Unit 5).
+    command: --sql-mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
     ports:
       - "3306:3306"
     volumes:
@@ -23,6 +25,27 @@ services:
       ADMINER_DEFAULT_SERVER: db
     depends_on:
       db:
+        condition: service_healthy
+
+  # Converts between DBML and SQL for ./sql. Not used directly.
+  dbml:
+    build: dbml
+    image: ice-bed-dbml:10.3.1
+
+  # Runs ./sql. Started on demand by the ./sql and sql.cmd wrappers.
+  runner:
+    build: runner
+    image: ice-bed-runner:1
+    profiles: ["tools"]
+    volumes:
+      - .:/course
+    environment:
+      DB_HOST: db
+      DBML_URL: http://dbml:3000
+    depends_on:
+      db:
+        condition: service_healthy
+      dbml:
         condition: service_healthy
 
 volumes:

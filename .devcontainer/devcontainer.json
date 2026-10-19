@@ -2,10 +2,10 @@
   "name": "ICE Malta BED",
   "dockerComposeFile": ["../docker-compose.yml", "compose.yml"],
   "service": "workspace",
-  "runServices": ["workspace", "db", "adminer"],
+  "runServices": ["workspace", "db", "dbml", "adminer"],
   "workspaceFolder": "/workspaces/course",
   "forwardPorts": [8080],
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y mariadb-client",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y mariadb-client && sudo docker-php-ext-install pdo_mysql",
   "customizations": {
     "vscode": {
       "extensions": ["dineug.vuerd-vscode", "bierner.markdown-mermaid"]

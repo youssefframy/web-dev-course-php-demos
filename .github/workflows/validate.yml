@@ -1,4 +1,4 @@
-name: Validate schemas
+name: Validate
 
 on:
   push:
@@ -7,19 +7,32 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    services:
-      mariadb:
-        image: mariadb:11.4
-        env:
-          MARIADB_ROOT_PASSWORD: root
-        options: >-
-          --health-cmd "healthcheck.sh --connect --innodb_initialized"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 20
     steps:
       - uses: actions/checkout@v4
-      - name: Apply every schema.sql and seed.sql under modules/
+
+      # The same compose file as on your computer, so the server settings match.
+      - name: Start the database
+        run: docker compose up -d --wait db dbml
+
+      - name: Apply every schema.sql and seed.sql under modules/ (Unit 2)
         env:
-          DB_CMD: docker exec -i ${{ job.services.mariadb.id }} mariadb -uroot -proot
+          DB_CMD: docker compose exec -T db mariadb -uroot -proot
         run: scripts/validate.sh
+
+      - name: Rebuild every database from its chain files
+        run: ./sql rebuild --all
+
+      - name: Check every exercise (fails only on SQL errors)
+        run: ./sql check --all --ci
+
+      - name: Write the progress table
+        if: always()
+        run: ./sql progress --markdown >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check that autograding.json is up to date
+        run: |
+          ./sql autograding
+          git diff --exit-code .github/classroom/autograding.json || {
+            echo "autograding.json is out of date. Run ./sql autograding and commit the result."
+            exit 1
+          }

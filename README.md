@@ -47,6 +47,24 @@ scripts/validate.sh
 
 It applies each `schema.sql` to a fresh database, followed by its `seed.sql` if there is one. Any file it cannot apply is reported, along with the error. Files that are still empty stubs are skipped.
 
+### From Unit 4: the `./sql` tool
+
+From Unit 4 onwards, your databases build up over the course. The files that build them live in `db/`, one folder per database. `course/MAP.md` shows which checkpoint changes which tables.
+
+`./sql` checks your work and manages the databases. On Windows, use `sql` instead of `./sql`.
+
+```sh
+./sql check                    # check the checkpoint you are working on
+./sql next                     # show the next exercise
+./sql progress                 # show what is done
+./sql rebuild iceadmin         # rebuild iceadmin from your own files in db/iceadmin/
+./sql reset iceadmin --at m4u4 # load the reference state at the end of Unit 4
+./sql shell iceadmin           # open the MariaDB client
+./sql help                     # list every command
+```
+
+Each check runs on a scratch copy, so checking never changes your databases. If you are stuck, `./sql reset` gives you a correct starting point for the next unit.
+
 ## How to submit
 
 Your instructor will send you a GitHub Classroom link. Accepting it creates your own copy of this repository. Clone that copy and do your work in it.

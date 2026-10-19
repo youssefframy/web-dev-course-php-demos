@@ -1,0 +1,7 @@
+{
+  "name": "ice-bed-dbml",
+  "private": true,
+  "dependencies": {
+    "@dbml/cli": "10.3.1"
+  }
+}

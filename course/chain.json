@@ -1,0 +1,44 @@
+{
+  "note": "Each database is its base snapshot plus these steps, in order. Break-it files are never steps: they run in scratch databases. TODO: when Unit 3 has checkpoints, make the U3 DDL and DML files the first steps and build after-m4u3 from them.",
+  "databases": {
+    "iceadmin": {
+      "base": "m4u3",
+      "snapshots": {
+        "m4u3": "snapshots/iceadmin/after-m4u3.sql",
+        "m4u4": "snapshots/iceadmin/after-m4u4.sql",
+        "m4u5": "snapshots/iceadmin/after-m4u5.sql"
+      },
+      "steps": [
+        {"cp": "m4u4-cp01", "file": "db/iceadmin/u4_01_add_column.sql"},
+        {"cp": "m4u4-cp01", "file": "db/iceadmin/u4_01_change_column.sql"},
+        {"cp": "m4u4-cp01", "file": "db/iceadmin/u4_01_drop_column.sql"},
+        {"cp": "m4u4-cp02", "file": "db/iceadmin/u4_02_leavebooking.sql"},
+        {"cp": "m4u4-cp03", "file": "db/iceadmin/u4_03_vendor.sql"},
+        {"cp": "m4u4-cp05", "file": "db/iceadmin/u4_05_referential_actions.sql"},
+        {"cp": "m4u4-cp06", "file": "db/iceadmin/u4_06_check_constraints.sql"}
+      ]
+    },
+    "tvstudio": {
+      "base": "m4u3",
+      "snapshots": {
+        "m4u3": "snapshots/tvstudio/after-m4u3.sql",
+        "m4u4": "snapshots/tvstudio/after-m4u4.sql",
+        "m4u5": "snapshots/tvstudio/after-m4u5.sql"
+      },
+      "steps": [
+        {"cp": "m4u4-cp07", "file": "db/tvstudio/u4_migration.sql"},
+        {"cp": "m4u5-cp08", "file": "db/tvstudio/tvstudio-topup.sql"}
+      ]
+    },
+    "pos": {
+      "base": "m4u5",
+      "snapshots": {"m4u5": "seeds/pos.sql"},
+      "steps": []
+    },
+    "joinlab": {
+      "base": "m4u5",
+      "snapshots": {"m4u5": "seeds/joinlab.sql"},
+      "steps": []
+    }
+  }
+}

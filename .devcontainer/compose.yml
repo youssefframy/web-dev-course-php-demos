@@ -1,12 +1,18 @@
-# Adds the container VS Code runs in. The db and adminer services come from ../docker-compose.yml.
+# Adds the container VS Code runs in. The db, dbml and adminer services come from ../docker-compose.yml.
 services:
   workspace:
-    image: mcr.microsoft.com/devcontainers/base:bookworm
+    image: mcr.microsoft.com/devcontainers/php:1-8.3-bookworm
     command: sleep infinity
     volumes:
       - ..:/workspaces/course:cached
     environment:
       DB_CMD: mariadb -h db -uroot -proot
+      # ./sql runs the tool directly here, instead of in the runner service.
+      SQL_RUNNER_LOCAL: "1"
+      DB_HOST: db
+      DBML_URL: http://dbml:3000
     depends_on:
       db:
+        condition: service_healthy
+      dbml:
         condition: service_healthy
