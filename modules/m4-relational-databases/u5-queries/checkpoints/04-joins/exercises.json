@@ -1,0 +1,72 @@
+{
+    "checkpoint": "m4u5-cp04",
+    "title": "Joins",
+    "exercises": [
+        {
+            "id": "m4u5-04-predict",
+            "type": "manual",
+            "file": "PREDICT.md",
+            "hint": "Predict before you run. Count the rows."
+        },
+        {
+            "id": "m4u5-04-inner",
+            "type": "query",
+            "db": "joinlab",
+            "file": "answers/inner.sql",
+            "hash": "9e9443add3df9b2cedbba51bbf1a7be93c234a764746d3e4d13267275c7f6ac7",
+            "hint": "JOIN Department ON Department.id = Employee.deptId",
+            "rows": 4
+        },
+        {
+            "id": "m4u5-04-left",
+            "type": "query",
+            "db": "joinlab",
+            "file": "answers/left.sql",
+            "hash": "d0638edf87392cdf165e56f93f8a80aeb6cd8c1401dafe30eb73437455561534",
+            "hint": "LEFT JOIN keeps every row of the table before it.",
+            "rows": 5
+        },
+        {
+            "id": "m4u5-04-right",
+            "type": "query",
+            "db": "joinlab",
+            "file": "answers/right.sql",
+            "hash": "3cdb818d0d7f372cd2454f6024f0fb311c02ad2f2783c261ea2dbe7b455ae850",
+            "hint": "RIGHT JOIN keeps every row of the table after it.",
+            "rows": 5
+        },
+        {
+            "id": "m4u5-04-full",
+            "type": "query",
+            "db": "joinlab",
+            "file": "answers/full.sql",
+            "hash": "92f7605e33e0848316850ea86817db61e3baa0025e4cf4a4a1a633a9827ef46c",
+            "hint": "The LEFT JOIN query, then UNION, then the RIGHT JOIN query.",
+            "rows": 6
+        },
+        {
+            "id": "m4u5-04-bridge-inner",
+            "type": "query",
+            "db": "iceadmin",
+            "file": "answers/bridge_inner.sql",
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA0LCBicmlkZ2UtaW5uZXIuIFdyaXRlIG9uZSBTRUxFQ1Qgc3RhdGVtZW50IGJlbG93LgpTRUxFQ1QgRW1wbG95ZWUubmFtZSwgRW1wbG95ZWUuc3VybmFtZSwgRGVwYXJ0bWVudC5uYW1lIEFTIGRlcHQKRlJPTSBFbXBsb3llZQogICAgSk9JTiBFbXBsb3llZURlcGFydG1lbnQgT04gRW1wbG95ZWVEZXBhcnRtZW50LmVtcGxveWVlSWQgPSBFbXBsb3llZS5pZAogICAgSk9JTiBEZXBhcnRtZW50IE9OIERlcGFydG1lbnQuaWQgPSBFbXBsb3llZURlcGFydG1lbnQuZGVwYXJ0bWVudElkOwo=",
+            "hint": "Two joins: Employee to EmployeeDepartment, then EmployeeDepartment to Department."
+        },
+        {
+            "id": "m4u5-04-bridge-left",
+            "type": "query",
+            "db": "iceadmin",
+            "file": "answers/bridge_left.sql",
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA0LCBicmlkZ2UtbGVmdC4gV3JpdGUgb25lIFNFTEVDVCBzdGF0ZW1lbnQgYmVsb3cuClNFTEVDVCBEZXBhcnRtZW50Lm5hbWUgQVMgZGVwdCwgRW1wbG95ZWUubmFtZSwgRW1wbG95ZWUuc3VybmFtZQpGUk9NIERlcGFydG1lbnQKICAgIExFRlQgSk9JTiBFbXBsb3llZURlcGFydG1lbnQgT04gRW1wbG95ZWVEZXBhcnRtZW50LmRlcGFydG1lbnRJZCA9IERlcGFydG1lbnQuaWQKICAgIExFRlQgSk9JTiBFbXBsb3llZSBPTiBFbXBsb3llZS5pZCA9IEVtcGxveWVlRGVwYXJ0bWVudC5lbXBsb3llZUlkOwo=",
+            "hint": "Start FROM Department, and make both joins LEFT JOINs."
+        },
+        {
+            "id": "m4u5-04-lucy",
+            "type": "query",
+            "db": "iceadmin",
+            "file": "answers/lucy.sql",
+            "reference": "LS0gVW5pdCA1LCBjaGVja3BvaW50IDA0LCBsdWN5LiBXcml0ZSBvbmUgU0VMRUNUIHN0YXRlbWVudCBiZWxvdy4KU0VMRUNUIExlYXZlQm9va2luZy5kYXRlRnJvbSwgTGVhdmVCb29raW5nLmRhdGVUbywgRW1wbG95ZWUubmFtZSwgRW1wbG95ZWUuc3VybmFtZQpGUk9NIExlYXZlQm9va2luZwogICAgTEVGVCBKT0lOIEVtcGxveWVlIE9OIEVtcGxveWVlLmlkID0gTGVhdmVCb29raW5nLmVtcGxveWVlSWQ7Cg==",
+            "hint": "FROM LeaveBooking LEFT JOIN Employee ..."
+        }
+    ]
+}

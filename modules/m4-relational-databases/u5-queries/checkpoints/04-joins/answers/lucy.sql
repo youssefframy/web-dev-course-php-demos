@@ -1,0 +1,1 @@
+-- Unit 5, checkpoint 04, lucy. Write one SELECT statement below.
