@@ -1,0 +1,1 @@
+-- Unit 5, checkpoint 01, warmup-2. Write one SELECT statement below.

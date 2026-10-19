@@ -1152,7 +1152,7 @@ function cmdContinuity(): int
     foreach (['the reference chain' => false, 'the previous snapshot' => true] as $label => $fromSnapshot) {
         echo "\nCheckpoints: every reference solution, starting from $label.\n";
         foreach (runMany(array_keys(exercises()), true, $fromSnapshot) as $id => $r) {
-            $line($r['status'] === 'PASS', $id, $r['status'] === 'PASS' ? '' : "{$r['status']} {$r['message']}");
+            $line($r['status'] === 'PASS', $id, match ($r['status']) { 'PASS' => '', 'FAIL' => $r['message'], default => "{$r['status']}: {$r['message']}" });
         }
     }
     echo $failed ? "\n$failed failure(s)\n" : "\nThe course adds up.\n";

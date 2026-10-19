@@ -1,0 +1,45 @@
+{
+    "checkpoint": "m4u5-cp01",
+    "title": "A tour of POS",
+    "exercises": [
+        {
+            "id": "m4u5-01-pos-dbml",
+            "type": "structure",
+            "db": "pos",
+            "assert": [
+                {
+                    "drift": "/db/pos/pos.dbml"
+                }
+            ],
+            "hint": "Run ./sql sql2dbml pos. It writes db/pos/pos.dbml for you."
+        },
+        {
+            "id": "m4u5-01-warmup-1",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/warmup_1.sql",
+            "ordered": true,
+            "hash": "c4987f1b88d428bd81016b97a42fb19217596d7b52868793ea3fb2b0849acd8f",
+            "hint": "ORDER BY can take more than one column.",
+            "rows": 6
+        },
+        {
+            "id": "m4u5-01-warmup-2",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/warmup_2.sql",
+            "hash": "07f03ec553f5cd3f6957b84c5998dbf10b7f46a36fae980445cb66a1a2afdeab",
+            "hint": "WHERE Item.price > 100",
+            "rows": 3
+        },
+        {
+            "id": "m4u5-01-warmup-3",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/warmup_3.sql",
+            "hash": "f5374095d5838e464e6312c3483f18c68406036827dcee52efd93b09ad410605",
+            "hint": "Which cashier is Roger Vassallo? Look in Cashier first.",
+            "rows": 2
+        }
+    ]
+}

@@ -23,6 +23,8 @@ Three databases run through Module 4. Each unit starts where the previous one en
 | m4u4-cp06 | iceadmin | LeaveBooking: CHECK c_leavebooking_dates; Salary: CHECK c_salary_amount | `db/iceadmin/u4_06_check_constraints.sql` |
 | m4u4-cp07 | tvstudio | Episode: runtimeMinutes, ageRating added, directorId allows NULL; Station.name VARCHAR(100); SET NULL and CASCADE rules on Episode, SeriesActor, Transmission | `db/tvstudio/u4_migration.sql` |
 | m4u4-cp08 | iceadmin, tvstudio | No tables; `iceadmin.dbml` and `tvstudio.dbml` brought up to date | `db/*/*.dbml` (not chain steps) |
+| m4u5-cp01 | pos | No tables; `pos.dbml` generated with sql2dbml | `db/pos/pos.dbml` (not a chain step) |
+| m4u5-cp02 to cp07 | pos, joinlab, iceadmin | None. Queries only. Some checks add rows to their scratch copy | none |
 
 ## Snapshots
 
