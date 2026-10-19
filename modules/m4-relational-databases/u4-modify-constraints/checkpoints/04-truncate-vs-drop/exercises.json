@@ -1,0 +1,38 @@
+{
+  "checkpoint": "m4u4-cp04",
+  "title": "TRUNCATE and DROP",
+  "exercises": [
+    {
+      "id": "m4u4-04-breakit-truncate",
+      "type": "error",
+      "db": "iceadmin",
+      "file": "answers/truncate_employee.sql",
+      "expect": 1701,
+      "hint": "TRUNCATE TABLE Employee;"
+    },
+    {
+      "id": "m4u4-04-truncate-safe",
+      "type": "script",
+      "db": "iceadmin",
+      "file": "answers/truncate_safe.sql",
+      "assert": [
+        {"sql": "SELECT id, dateFrom, dateTo, employeeId FROM LeaveBooking", "equals": "1, 2024-06-03, 2024-06-04, 1", "say": "LeaveBooking after TRUNCATE and one insert"},
+        {"sql": "SELECT COUNT(*) FROM Employee", "equals": "3", "say": "Employee rows"}
+      ],
+      "hint": "TRUNCATE TABLE LeaveBooking; then one INSERT. Do not set the id yourself."
+    },
+    {
+      "id": "m4u4-04-drop",
+      "type": "script",
+      "db": "iceadmin",
+      "file": "answers/drop_table.sql",
+      "assert": [
+        {"no_table": "Vendor"},
+        {"no_table": "LeaveBooking"},
+        {"table": "Employee"},
+        {"sql": "SELECT COUNT(*) FROM Employee", "equals": "3", "say": "Employee rows"}
+      ],
+      "hint": "DROP TABLE Vendor; then DROP TABLE LeaveBooking;"
+    }
+  ]
+}

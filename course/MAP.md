@@ -18,6 +18,7 @@ Three databases run through Module 4. Each unit starts where the previous one en
 | m4u4-cp01 | iceadmin | Employee: employmentStart added, changed, dropped (no net change) | `db/iceadmin/u4_01_*.sql` |
 | m4u4-cp02 | iceadmin | LeaveBooking created with 5 rows; c_leavebooking_employee added | `db/iceadmin/u4_02_leavebooking.sql` |
 | m4u4-cp03 | iceadmin | Vendor created, name widened to VARCHAR(50), 4 rows (ids 1 to 4 after a rebuild) | `db/iceadmin/u4_03_vendor.sql` |
+| m4u4-cp04 | none | Scratch copies only; nothing in the chain | none |
 
 ## Snapshots
 
