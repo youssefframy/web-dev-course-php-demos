@@ -1,0 +1,278 @@
+{
+    "checkpoint": "m4u4-cp07",
+    "title": "tvstudio evolves",
+    "exercises": [
+        {
+            "id": "m4u4-07-preflight",
+            "type": "structure",
+            "db": "tvstudio",
+            "after": "m4u4-cp06",
+            "assert": [
+                {
+                    "table": "Series"
+                },
+                {
+                    "table": "Actor"
+                },
+                {
+                    "table": "SeriesActor"
+                },
+                {
+                    "table": "Director"
+                },
+                {
+                    "table": "Episode"
+                },
+                {
+                    "table": "Station"
+                },
+                {
+                    "table": "Transmission"
+                },
+                {
+                    "column": "Series.id"
+                },
+                {
+                    "column": "Series.name"
+                },
+                {
+                    "column": "Actor.id"
+                },
+                {
+                    "column": "Actor.name"
+                },
+                {
+                    "column": "Actor.surname"
+                },
+                {
+                    "column": "Actor.dateOfBirth"
+                },
+                {
+                    "column": "SeriesActor.id"
+                },
+                {
+                    "column": "SeriesActor.seriesId"
+                },
+                {
+                    "column": "SeriesActor.actorId"
+                },
+                {
+                    "column": "Director.id"
+                },
+                {
+                    "column": "Director.name"
+                },
+                {
+                    "column": "Director.surname"
+                },
+                {
+                    "column": "Director.dateOfBirth"
+                },
+                {
+                    "column": "Episode.id"
+                },
+                {
+                    "column": "Episode.season"
+                },
+                {
+                    "column": "Episode.number"
+                },
+                {
+                    "column": "Episode.title"
+                },
+                {
+                    "column": "Episode.seriesId"
+                },
+                {
+                    "column": "Episode.directorId"
+                },
+                {
+                    "column": "Station.id"
+                },
+                {
+                    "column": "Station.name"
+                },
+                {
+                    "column": "Transmission.id"
+                },
+                {
+                    "column": "Transmission.airDateTime"
+                },
+                {
+                    "column": "Transmission.episodeId"
+                },
+                {
+                    "column": "Transmission.stationId"
+                },
+                {
+                    "fk": "SeriesActor.seriesId -> Series.id"
+                },
+                {
+                    "fk": "SeriesActor.actorId -> Actor.id"
+                },
+                {
+                    "fk": "Episode.seriesId -> Series.id"
+                },
+                {
+                    "fk": "Episode.directorId -> Director.id"
+                },
+                {
+                    "fk": "Transmission.episodeId -> Episode.id"
+                },
+                {
+                    "fk": "Transmission.stationId -> Station.id"
+                }
+            ],
+            "hint": "Your tvstudio must use the Exercise 2.4 names. Run ./sql reset tvstudio --at m4u3 to start from the reference state."
+        },
+        {
+            "id": "m4u4-07-migration",
+            "type": "structure",
+            "db": "tvstudio",
+            "file": "/db/tvstudio/u4_migration.sql",
+            "assert": [
+                {
+                    "column": "Episode.runtimeMinutes",
+                    "type": "smallint(5) unsigned",
+                    "null": true
+                },
+                {
+                    "column": "Episode.ageRating",
+                    "type": "enum('U','PG','12','15','18')",
+                    "null": true
+                },
+                {
+                    "column": "Station.name",
+                    "type": "varchar(100)",
+                    "null": false
+                },
+                {
+                    "unique": "Station(name)"
+                },
+                {
+                    "column": "Episode.directorId",
+                    "type": "int",
+                    "null": true
+                },
+                {
+                    "fk": "Episode.directorId -> Director.id",
+                    "delete": "SET NULL"
+                },
+                {
+                    "fk": "Episode.seriesId -> Series.id",
+                    "delete": "CASCADE"
+                },
+                {
+                    "fk": "SeriesActor.seriesId -> Series.id",
+                    "delete": "CASCADE"
+                },
+                {
+                    "fk": "Transmission.episodeId -> Episode.id",
+                    "delete": "CASCADE"
+                },
+                {
+                    "fk": "SeriesActor.actorId -> Actor.id"
+                },
+                {
+                    "fk": "Transmission.stationId -> Station.id"
+                }
+            ],
+            "hint": "Widen Station.name with CHANGE COLUMN and keep NOT NULL. Allow NULL in Episode.directorId before adding ON DELETE SET NULL."
+        },
+        {
+            "id": "m4u4-07-alter-only",
+            "type": "script",
+            "db": "tvstudio",
+            "file": "/db/tvstudio/u4_migration.sql",
+            "forbid": [
+                "\\bCREATE\\s+TABLE\\b",
+                "\\bDROP\\s+TABLE\\b",
+                "\\bRENAME\\s+TABLE\\b",
+                "\\bTRUNCATE\\b",
+                "\\bINSERT\\b",
+                "\\bUPDATE\\s+\\w+\\s+SET\\b",
+                "\\bDELETE\\s+FROM\\b"
+            ],
+            "assert": [
+                {
+                    "rows_unchanged": [
+                        "Series",
+                        "Actor",
+                        "SeriesActor",
+                        "Director",
+                        "Episode",
+                        "Station",
+                        "Transmission"
+                    ]
+                }
+            ],
+            "hint": "Every change is an ALTER TABLE. Rows are never removed or added."
+        },
+        {
+            "id": "m4u4-07-behaviour",
+            "type": "script",
+            "db": "tvstudio",
+            "file": "/db/tvstudio/u4_migration.sql",
+            "assert": [
+                {
+                    "exec": "INSERT INTO Director (name, surname) VALUES ('Probe', 'Director')",
+                    "say": "adding a test director"
+                },
+                {
+                    "exec": "INSERT INTO Series (name) VALUES ('Probe Series')",
+                    "say": "adding a test series"
+                },
+                {
+                    "exec": "INSERT INTO Actor (name, surname) VALUES ('Probe', 'Actor')",
+                    "say": "adding a test actor"
+                },
+                {
+                    "exec": "INSERT INTO Station (name) VALUES ('Probe Station With A Name Well Over Fifty Characters Long')",
+                    "say": "adding a station with a 57-character name"
+                },
+                {
+                    "exec": "INSERT INTO Episode (season, number, title, seriesId, directorId, runtimeMinutes, ageRating) SELECT 1, 1, 'Probe Episode', s.id, d.id, 45, '12' FROM Series s, Director d WHERE s.name = 'Probe Series' AND d.name = 'Probe' AND d.surname = 'Director'",
+                    "say": "adding a test episode with a running time and rating"
+                },
+                {
+                    "exec": "INSERT INTO SeriesActor (seriesId, actorId) SELECT s.id, a.id FROM Series s, Actor a WHERE s.name = 'Probe Series' AND a.name = 'Probe' AND a.surname = 'Actor'",
+                    "say": "adding a test cast link"
+                },
+                {
+                    "exec": "INSERT INTO Transmission (airDateTime, episodeId, stationId) SELECT '2030-01-01 20:00:00', e.id, st.id FROM Episode e, Station st WHERE e.title = 'Probe Episode' AND st.name = 'Probe Station With A Name Well Over Fifty Characters Long'",
+                    "say": "adding a test transmission"
+                },
+                {
+                    "exec": "DELETE FROM Director WHERE name = 'Probe' AND surname = 'Director'",
+                    "say": "deleting the test director (brief, point 3)"
+                },
+                {
+                    "sql": "SELECT COUNT(*), COALESCE(MAX(directorId), 'NULL') FROM Episode WHERE title = 'Probe Episode'",
+                    "equals": "1, NULL",
+                    "say": "the test episode after its director was deleted (count, directorId)"
+                },
+                {
+                    "exec": "DELETE FROM Series WHERE name = 'Probe Series'",
+                    "say": "deleting the test series (brief, point 4)"
+                },
+                {
+                    "sql": "SELECT (SELECT COUNT(*) FROM Episode WHERE title = 'Probe Episode'), (SELECT COUNT(*) FROM SeriesActor sa JOIN Actor a ON a.id = sa.actorId WHERE a.name = 'Probe' AND a.surname = 'Actor'), (SELECT COUNT(*) FROM Transmission t JOIN Station st ON st.id = t.stationId WHERE st.name = 'Probe Station With A Name Well Over Fifty Characters Long')",
+                    "equals": "0, 0, 0",
+                    "say": "episodes, cast links and transmissions left after the series was deleted"
+                },
+                {
+                    "sql": "SELECT COUNT(*) FROM Actor WHERE name = 'Probe' AND surname = 'Actor'",
+                    "equals": "1",
+                    "say": "the test actor is kept"
+                }
+            ],
+            "hint": "The check adds a test director, series, episode, cast link and transmission, then deletes the director and the series. Read which step failed."
+        },
+        {
+            "id": "m4u4-07-decisions",
+            "type": "manual",
+            "file": "/db/tvstudio/DECISIONS.md",
+            "hint": "One row per foreign key, including the two the brief does not mention."
+        }
+    ]
+}

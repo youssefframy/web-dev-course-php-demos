@@ -1,0 +1,1 @@
+-- Unit 4, checkpoint 07. Your migration: ALTER TABLE statements only, applied on top of tvstudio after Unit 3.

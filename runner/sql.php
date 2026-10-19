@@ -536,6 +536,13 @@ function assertAll(string $schema, array $asserts, string $cpDir, array $before 
             if ($got !== (string) $a['equals']) {
                 $fails[] = ($a['say'] ?? $a['sql']) . ": got \"$got\", expected \"{$a['equals']}\"";
             }
+        } elseif (isset($a['exec'])) {
+            try {
+                pdo()->exec($a['exec']);
+            } catch (PDOException $e) {
+                $fails[] = ($a['say'] ?? $a['exec']) . ' failed: ' . ($e->errorInfo[2] ?? $e->getMessage());
+                break;
+            }
         } elseif (isset($a['rows_unchanged'])) {
             foreach ($a['rows_unchanged'] as $t) {
                 $now = (int) q("SELECT COUNT(*) n FROM `$t`")[0]['n'];
@@ -727,7 +734,8 @@ function runExercise(array $ex, bool $fromSnapshot = false): array
                 }
                 foreach ($ex['forbid'] ?? [] as $pattern) {
                     if (preg_match('/' . $pattern . '/i', stripSqlComments(file_get_contents($file)))) {
-                        return $result('FAIL', rel($file) . " must not use $pattern", false, $note);
+                        $words = trim(str_replace(['\\b', '\\s+', '\\w+'], ['', ' ', '...'], $pattern));
+                        return $result('FAIL', rel($file) . " must not use $words", false, $note);
                     }
                 }
             }

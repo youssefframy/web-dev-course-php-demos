@@ -55,7 +55,7 @@ A checked checkpoint has an `exercises.json` next to its README. `./sql` finds e
   - `structure` and `script`: run the file, if there is one, then each entry in `assert`. Options: `twice` (run the file twice) and `forbid` (regular expressions the file must not match).
   - `error`: passes when the file stops with an error code in `expect`.
   - `manual`: passes when every box in the Markdown file is ticked.
-- Assertions: `table`, `no_table`, `column` (with `type` and `null`), `no_column`, `fk` (`"T.c -> R.c"` with `update` and `delete`), `no_fk`, `unique`, `check` (with `any_of`), `sql` (with `equals`), `rows_unchanged`, and `drift` (a DBML file).
+- Assertions: `table`, `no_table`, `column` (with `type` and `null`), `no_column`, `fk` (`"T.c -> R.c"` with `update` and `delete`), `no_fk`, `unique`, `check` (with `any_of`), `sql` (with `equals`), `exec` (runs a statement, for behaviour checks), `rows_unchanged`, and `drift` (a DBML file).
 - Break-it files are never chain steps. Chain steps live in `db/<db>/` and are listed in `course/chain.json`.
 - Every checkpoint README says which database state it expects, and how to load it with `./sql reset`.
 

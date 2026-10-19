@@ -25,5 +25,6 @@ Your work goes in `db/iceadmin/` and `db/tvstudio/`. Each file there is one step
 | 04 | [TRUNCATE and DROP](checkpoints/04-truncate-vs-drop/README.md) | Tables emptied and removed on a scratch copy |
 | 05 | [Referential actions](checkpoints/05-referential-actions/README.md) | CASCADE and SET NULL rules, and Lucy deleted |
 | 06 | [CHECK constraints](checkpoints/06-check-constraints/README.md) | Rules on leave dates and salary amounts |
+| 07 | [tvstudio evolves](checkpoints/07-tvstudio-evolves/README.md) | Your tvstudio migrated to a new brief |
 
 Back to [Module 4](../README.md).
