@@ -2,6 +2,8 @@
 # Runs the course tool. Try: ./sql help
 # In the dev container PHP is installed, so the tool runs directly. Elsewhere it runs in the runner service.
 cd "$(dirname "$0")" || exit 2
+# The dev container adds a workspace service this file does not know about. That is expected.
+export COMPOSE_IGNORE_ORPHANS=1
 if [ -n "${SQL_RUNNER_LOCAL:-}" ]; then
   exec php runner/sql.php "$@"
 fi

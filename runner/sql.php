@@ -1006,12 +1006,12 @@ function cmdDrift(array $args): int
 {
     $db = $args[0] ?? fail('Usage: ./sql drift <db>');
     chainDb($db);
-    $file = realpath(ROOT) . "/db/$db/$db.dbml";
+    $file = resolve("/db/$db/$db.dbml");
     $lines = driftLines($file, $db);
     foreach ($lines as $l) {
         echo "DRIFT $l\n";
     }
-    echo $lines ? count($lines) . " difference(s) between db/$db/$db.dbml and $db\n" : "PASS db/$db/$db.dbml matches $db\n";
+    echo $lines ? count($lines) . ' difference(s) between ' . rel($file) . " and $db\n" : 'PASS ' . rel($file) . " matches $db\n";
     return $lines ? 1 : 0;
 }
 
