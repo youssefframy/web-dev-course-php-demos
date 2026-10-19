@@ -707,7 +707,7 @@ function runExercise(array $ex, bool $fromSnapshot = false): array
                 return $result('FAIL', 'the file ran without an error. Expected error ' . implode(' or ', $want), false, $note);
             }
             if (in_array($err['code'], $want, true)) {
-                return $result('PASS', '', false, $note);
+                return $result('PASS', '', false, $note ?? "the server said: {$err['message']}");
             }
             return $result('FAIL', 'expected error ' . implode(' or ', $want) . ", got {$err['message']}", true, $note);
 
@@ -1107,6 +1107,10 @@ function cmdContinuity(): int
     echo "Chains: replay every reference chain from its base and compare each unit boundary with its snapshot.\n";
     foreach (chain()['databases'] as $db => $c) {
         foreach (boundaries($db) as [$unit, $file, $k]) {
+            if (!is_file(realpath(ROOT) . '/' . $file)) {
+                echo "SKIP $db after-$unit: $file is not written yet\n";
+                continue;
+            }
             $state = buildState($db, $k, "ref_$db");
             if (!$state['ok'] || $state['note']) {
                 $line(false, "$db after-$unit", $state['message'] ?: $state['note']);

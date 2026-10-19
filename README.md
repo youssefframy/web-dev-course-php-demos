@@ -7,6 +7,7 @@ Exercises for the Back-End Development With PHP course. Each unit is split into 
 | Module | Unit | Checkpoints |
 |---|---|---|
 | [M4 Relational Databases](modules/m4-relational-databases/README.md) | [U2 Database Analysis & Design](modules/m4-relational-databases/u2-database-design/README.md) | 01 to 07 |
+| | [U4 Modifying Structure & Adding Constraints](modules/m4-relational-databases/u4-modify-constraints/README.md) | 01 to 08 |
 
 More units will be added here as the course progresses.
 

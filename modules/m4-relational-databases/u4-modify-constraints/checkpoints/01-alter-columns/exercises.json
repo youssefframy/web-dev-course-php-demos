@@ -1,0 +1,43 @@
+{
+  "checkpoint": "m4u4-cp01",
+  "title": "Alter columns",
+  "exercises": [
+    {
+      "id": "m4u4-01-predict",
+      "type": "manual",
+      "file": "PREDICT.md",
+      "hint": "Write the prediction first, then run the file and record what the server did."
+    },
+    {
+      "id": "m4u4-01-add",
+      "type": "structure",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_01_add_column.sql",
+      "assert": [
+        {"column": "Employee.employmentStart", "type": "datetime", "null": false}
+      ],
+      "hint": "ALTER TABLE Employee ADD ... followed by the column name and its full definition."
+    },
+    {
+      "id": "m4u4-01-change",
+      "type": "structure",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_01_change_column.sql",
+      "assert": [
+        {"column": "Employee.employmentStart", "type": "date", "null": false}
+      ],
+      "hint": "CHANGE COLUMN takes the old name, the new name and the full new definition. The name can stay the same."
+    },
+    {
+      "id": "m4u4-01-drop",
+      "type": "structure",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_01_drop_column.sql",
+      "assert": [
+        {"no_column": "Employee.employmentStart"},
+        {"sql": "SELECT COUNT(*) FROM Employee", "equals": "3", "say": "Employee rows"}
+      ],
+      "hint": "ALTER TABLE ... DROP COLUMN ..."
+    }
+  ]
+}
