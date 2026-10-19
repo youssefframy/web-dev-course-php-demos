@@ -1,0 +1,24 @@
+{
+  "checkpoint": "m4u4-cp08",
+  "title": "Diagrams in sync",
+  "exercises": [
+    {
+      "id": "m4u4-08-iceadmin-sync",
+      "type": "structure",
+      "db": "iceadmin",
+      "assert": [
+        {"drift": "/db/iceadmin/iceadmin.dbml"}
+      ],
+      "hint": "Run ./sql drift iceadmin and fix one line at a time."
+    },
+    {
+      "id": "m4u4-08-tvstudio-sync",
+      "type": "structure",
+      "db": "tvstudio",
+      "assert": [
+        {"drift": "/db/tvstudio/tvstudio.dbml"}
+      ],
+      "hint": "Run ./sql drift tvstudio. Remember the enum and the type with a space in it need quotes."
+    }
+  ]
+}

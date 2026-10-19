@@ -26,5 +26,6 @@ Your work goes in `db/iceadmin/` and `db/tvstudio/`. Each file there is one step
 | 05 | [Referential actions](checkpoints/05-referential-actions/README.md) | CASCADE and SET NULL rules, and Lucy deleted |
 | 06 | [CHECK constraints](checkpoints/06-check-constraints/README.md) | Rules on leave dates and salary amounts |
 | 07 | [tvstudio evolves](checkpoints/07-tvstudio-evolves/README.md) | Your tvstudio migrated to a new brief |
+| 08 | [Diagrams in sync](checkpoints/08-sync/README.md) | Both DBML files match their databases |
 
 Back to [Module 4](../README.md).
