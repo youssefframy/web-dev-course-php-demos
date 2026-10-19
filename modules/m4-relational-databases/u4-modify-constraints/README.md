@@ -24,5 +24,6 @@ Your work goes in `db/iceadmin/` and `db/tvstudio/`. Each file there is one step
 | 03 | [Vendor](checkpoints/03-vendor/README.md) | Vendor created after a failed insert |
 | 04 | [TRUNCATE and DROP](checkpoints/04-truncate-vs-drop/README.md) | Tables emptied and removed on a scratch copy |
 | 05 | [Referential actions](checkpoints/05-referential-actions/README.md) | CASCADE and SET NULL rules, and Lucy deleted |
+| 06 | [CHECK constraints](checkpoints/06-check-constraints/README.md) | Rules on leave dates and salary amounts |
 
 Back to [Module 4](../README.md).

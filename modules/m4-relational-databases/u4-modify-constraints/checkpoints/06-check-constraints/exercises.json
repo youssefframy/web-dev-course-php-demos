@@ -1,0 +1,26 @@
+{
+  "checkpoint": "m4u4-cp06",
+  "title": "CHECK constraints",
+  "exercises": [
+    {
+      "id": "m4u4-06-checks",
+      "type": "structure",
+      "db": "iceadmin",
+      "file": "/db/iceadmin/u4_06_check_constraints.sql",
+      "assert": [
+        {"check": "LeaveBooking", "any_of": ["dateTo >= dateFrom", "dateFrom <= dateTo"]},
+        {"check": "Salary", "any_of": ["amount > 0", "0 < amount"]},
+        {"sql": "SELECT CONSTRAINT_NAME FROM information_schema.CHECK_CONSTRAINTS WHERE CONSTRAINT_SCHEMA = DATABASE() ORDER BY CONSTRAINT_NAME", "equals": "c_leavebooking_dates | c_salary_amount", "say": "CHECK constraint names"}
+      ],
+      "hint": "ALTER TABLE LeaveBooking ADD CONSTRAINT c_leavebooking_dates CHECK (...);"
+    },
+    {
+      "id": "m4u4-06-breakit-check",
+      "type": "error",
+      "db": "iceadmin",
+      "file": "answers/bad_booking.sql",
+      "expect": 4025,
+      "hint": "INSERT INTO LeaveBooking (dateFrom, dateTo, employeeId) VALUES (...);"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+-- Unit 4, checkpoint 06, step 1. Add c_leavebooking_dates and c_salary_amount.

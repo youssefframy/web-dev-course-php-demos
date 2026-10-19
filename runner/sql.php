@@ -237,10 +237,12 @@ function stepsAfter(string $db, string $cp): int
 }
 
 /**
- * Builds $target as the database $db looks after $n chain steps.
+ * Builds $target as the database $db looks after $n chain steps, using the student's own files.
+ * If they cannot get that far, or $fromSnapshot is set, starts from the latest snapshot taken
+ * before $unit and replays only the steps after it.
  * Returns ['ok' => bool, 'pending' => bool, 'message' => string, 'note' => ?string].
  */
-function buildState(string $db, int $n, string $target, bool $fromSnapshot = false): array
+function buildState(string $db, int $n, string $target, bool $fromSnapshot = false, ?string $unit = null): array
 {
     $c = chainDb($db);
     $steps = $c['steps'];
@@ -265,10 +267,10 @@ function buildState(string $db, int $n, string $target, bool $fromSnapshot = fal
         }
     }
 
-    // Fall back to the latest reference snapshot at or before step $n.
+    // Fall back to the latest reference snapshot at or before step $n, taken before $unit started.
     $best = $bounds[0];
     foreach ($bounds as $b) {
-        if ($b[2] <= $n) {
+        if ($b[2] <= $n && ($unit === null || $b[0] < $unit) && is_file(realpath(ROOT) . '/' . $b[1])) {
             $best = $b;
         }
     }
@@ -663,7 +665,7 @@ function runExercise(array $ex, bool $fromSnapshot = false): array
     $scratch = "scratch_$db";
     $idx = $file !== null ? chainIndex($db, $file) : null;
     $n = $idx ?? stepsAfter($db, $ex['after'] ?? $ex['cp']);
-    $state = buildState($db, $n, $scratch, $fromSnapshot);
+    $state = buildState($db, $n, $scratch, $fromSnapshot, unitOf($ex['cp']));
     if (!$state['ok']) {
         return $result($state['pending'] ? 'PENDING' : 'FAIL', $state['message']);
     }

@@ -20,6 +20,7 @@ Three databases run through Module 4. Each unit starts where the previous one en
 | m4u4-cp03 | iceadmin | Vendor created, name widened to VARCHAR(50), 4 rows (ids 1 to 4 after a rebuild) | `db/iceadmin/u4_03_vendor.sql` |
 | m4u4-cp04 | none | Scratch copies only; nothing in the chain | none |
 | m4u4-cp05 | iceadmin | Salary, EmployeeDepartment, Vendor, LeaveBooking: new ON UPDATE / ON DELETE rules; Vendor.brandManager allows NULL; Lucy (id 2) deleted | `db/iceadmin/u4_05_referential_actions.sql` |
+| m4u4-cp06 | iceadmin | LeaveBooking: CHECK c_leavebooking_dates; Salary: CHECK c_salary_amount | `db/iceadmin/u4_06_check_constraints.sql` |
 
 ## Snapshots
 
