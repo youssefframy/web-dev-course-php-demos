@@ -1,0 +1,1 @@
+-- Unit 6, checkpoint 01, 6.1.4. Write one SELECT statement below.

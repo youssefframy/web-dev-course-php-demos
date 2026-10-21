@@ -1,0 +1,120 @@
+{
+    "checkpoint": "m4u6-cp01",
+    "title": "Views",
+    "exercises": [
+        {
+            "id": "m4u6-01-vwsolditems",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/vwSoldItems.sql",
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwSoldItems'",
+                    "equals": "vwSoldItems",
+                    "say": "vwSoldItems should be a view"
+                },
+                {
+                    "sql": "SELECT * FROM vwSoldItems ORDER BY 2",
+                    "equals": "Helfing Bone China Plate, 45.99, 8 | Microsoft Hololens 2, 455.99, 1 | Sony Bravia X3456, 1099.99, 1 | American Refridgeration B1, 1200.99, 1",
+                    "say": "vwSoldItems (name, unitPrice, qty)"
+                }
+            ],
+            "hint": "JOIN InvoiceItem to Item. Select Item.name, InvoiceItem.unitPrice, InvoiceItem.qty."
+        },
+        {
+            "id": "m4u6-01-6.1.1",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.1.1.sql",
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwHighValueInvoices'",
+                    "equals": "vwHighValueInvoices",
+                    "say": "vwHighValueInvoices should be a view"
+                },
+                {
+                    "sql": "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwHighValueInvoices'",
+                    "equals": "5",
+                    "say": "vwHighValueInvoices columns (all of Invoice)"
+                },
+                {
+                    "sql": "SELECT id, total FROM vwHighValueInvoices ORDER BY id",
+                    "equals": "1, 1099.99 | 2, 1200.99",
+                    "say": "vwHighValueInvoices"
+                },
+                {
+                    "exec": "INSERT INTO Invoice (total, cashierId, clientId, issueTime) VALUES (2000.00, 1, 1, '2022-01-25 09:00:00')",
+                    "say": "adding a 2000.00 invoice"
+                },
+                {
+                    "sql": "SELECT COUNT(*) FROM vwHighValueInvoices",
+                    "equals": "3",
+                    "say": "vwHighValueInvoices after a 2000.00 invoice is added"
+                }
+            ],
+            "hint": "Invoice.* with WHERE Invoice.total >= 1000."
+        },
+        {
+            "id": "m4u6-01-6.1.2",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.1.2.sql",
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwInvoiceDetails'",
+                    "equals": "vwInvoiceDetails",
+                    "say": "vwInvoiceDetails should be a view"
+                },
+                {
+                    "sql": "SELECT invoiceId, clientId, name, surname, cashierName, total FROM vwInvoiceDetails ORDER BY invoiceId",
+                    "equals": "1, 2, Lorraine, Pulis, Kristina, 1099.99 | 2, 4, Rachel, Bonavia, Roger, 1200.99 | 3, 2, Lorraine, Pulis, Roger, 823.91",
+                    "say": "vwInvoiceDetails"
+                }
+            ],
+            "hint": "JOIN Client and Cashier to Invoice. Invoice.id AS invoiceId, Cashier.name AS cashierName."
+        },
+        {
+            "id": "m4u6-01-6.1.3",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.1.3.sql",
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwItemCategory'",
+                    "equals": "vwItemCategory",
+                    "say": "vwItemCategory should be a view"
+                },
+                {
+                    "sql": "SELECT id, catName FROM vwItemCategory ORDER BY id",
+                    "equals": "1, Cutlery | 2, Cutlery | 3, Crockery | 4, Crockery | 5, Entertainment | 6, Appliances | 7, Appliances | 8, Entertainment",
+                    "say": "vwItemCategory"
+                }
+            ],
+            "hint": "JOIN Category ON Category.id = Item.categoryId. Columns id, name, catName."
+        },
+        {
+            "id": "m4u6-01-6.1.3-join",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.1.3-join.sql",
+            "setup": [
+                "CREATE VIEW vwItemCategory AS SELECT Item.id, Item.name, Category.catName FROM Item JOIN Category ON Category.id = Item.categoryId"
+            ],
+            "hash": "36e15deb5bff92cfd8f6e3b4c1e460473ba4dc8675746aa883925941c5d21294",
+            "hint": "JOIN vwItemCategory ON vwItemCategory.id = InvoiceItem.itemId.",
+            "rows": 4
+        },
+        {
+            "id": "m4u6-01-6.1.4",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.1.4.sql",
+            "setup": [
+                "CREATE VIEW vwInvoiceDetails AS SELECT Invoice.id AS invoiceId, Invoice.clientId, Client.name, Client.surname, Cashier.name AS cashierName, Invoice.total FROM Invoice JOIN Client ON Client.id = Invoice.clientId JOIN Cashier ON Cashier.id = Invoice.cashierId"
+            ],
+            "hash": "a866fc1e51bfd088418f1edd324fa7d60d7d5574dae17fad4ffdb69973737db2",
+            "hint": "(SELECT SUM(vwInvoiceDetails.total) FROM vwInvoiceDetails WHERE vwInvoiceDetails.clientId = Client.id) AS totalSpent",
+            "rows": 6
+        }
+    ]
+}

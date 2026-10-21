@@ -10,5 +10,6 @@ In this module you design a database from a written scenario, build it in MariaD
 | U3 | [Creating The Physical Design](u3-physical-design/demo/README.md) | Demo |
 | U4 | [Modifying Structure & Adding Constraints](u4-modify-constraints/README.md) | Available |
 | U5 | [Queries](u5-queries/README.md) | Available |
+| U6 | [Further SQL](u6-further-sql/README.md) | Available |
 
 Back to the [course index](../../README.md).

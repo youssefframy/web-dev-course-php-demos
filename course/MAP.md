@@ -26,6 +26,7 @@ Three databases run through Module 4. Each unit starts where the previous one en
 | m4u5-cp01 | pos | No tables; `pos.dbml` generated with sql2dbml | `db/pos/pos.dbml` (not a chain step) |
 | m4u5-cp02 to cp07 | pos, joinlab, iceadmin | None. Queries only. Some checks add rows to their scratch copy | none |
 | m4u5-cp08 | tvstudio | Series, Director, Actor, Station, Episode, SeriesActor, Transmission: edge-case rows added (provided, idempotent) | `db/tvstudio/tvstudio-topup.sql` |
+| m4u6-cp01 to cp04 | pos | None in the chain. Checks create views and add rows on scratch copies; cp03 and cp04 add the cp02 rows (`u6-further-sql/part2-data.sql`) in `setup` | none |
 
 ## Snapshots
 
@@ -53,4 +54,5 @@ Three databases run through Module 4. Each unit starts where the previous one en
 - The Unit 4 demonstrations that would change ids or remove the foreign key (ON UPDATE CASCADE, and dropping `c_leavebooking_employee`) run on scratch copies, so the chain is not affected.
 - Vendor ids are 1 to 4 after a rebuild. A student who ran the failing insert by hand sees 5 to 8 until they rebuild. No later query depends on Vendor ids.
 - Unit 5 uses U4's column names, `dateFrom` and `dateTo`. The U5 slides' sub-query uses `fromDate` and `toDate`.
+- Unit 6 changes the student's own `pos` (views, plus the checkpoint 02 invoices and payment), but every check starts from `seeds/pos.sql` and rebuilds what it needs in `setup`. So pos has no chain steps and no `m4u6` snapshot. `part2-data.sql` restores the checkpoint 02 rows after a reset, with the workbook's ids (invoices 6 and 7).
 - `seeds/pos.sql` keeps the gist's data exactly, including the typos "Forkes" and "Refridgeration", so results match the slides.

@@ -1,0 +1,1 @@
+-- Unit 6, checkpoint 01, vwSoldItems. Write your statements below.
