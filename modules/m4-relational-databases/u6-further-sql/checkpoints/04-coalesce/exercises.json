@@ -1,0 +1,153 @@
+{
+    "checkpoint": "m4u6-cp04",
+    "title": "Using COALESCE",
+    "exercises": [
+        {
+            "id": "m4u6-04-6.4.1",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.4.1.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)",
+                "CREATE VIEW vwDebtors AS SELECT T.*, CASE WHEN T.balance <= 499 THEN 'Sales' ELSE 'Finance' END AS Department FROM (SELECT Client.id, Client.name, Client.surname, (SELECT SUM(Invoice.total) FROM Invoice WHERE Invoice.clientId = Client.id) - (SELECT SUM(Payment.total) FROM Payment WHERE Payment.clientId = Client.id) AS balance FROM Client HAVING balance IS NOT NULL) AS T",
+                "CREATE VIEW vwInvoiceDetails AS SELECT Invoice.id AS invoiceId, Invoice.clientId, Client.name, Client.surname, Cashier.name AS cashierName, Invoice.total FROM Invoice JOIN Client ON Client.id = Invoice.clientId JOIN Cashier ON Cashier.id = Invoice.cashierId"
+            ],
+            "hash": "769385fd38c910138dd7e97540a1a29901ee6305654d6da112da2723f81f5869",
+            "hint": "SELECT * FROM vwDebtors;",
+            "rows": 2
+        },
+        {
+            "id": "m4u6-04-6.4.1-balance",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.4.1-balance.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)",
+                "CREATE VIEW vwDebtors AS SELECT T.*, CASE WHEN T.balance <= 499 THEN 'Sales' ELSE 'Finance' END AS Department FROM (SELECT Client.id, Client.name, Client.surname, (SELECT SUM(Invoice.total) FROM Invoice WHERE Invoice.clientId = Client.id) - (SELECT SUM(Payment.total) FROM Payment WHERE Payment.clientId = Client.id) AS balance FROM Client HAVING balance IS NOT NULL) AS T",
+                "CREATE VIEW vwInvoiceDetails AS SELECT Invoice.id AS invoiceId, Invoice.clientId, Client.name, Client.surname, Cashier.name AS cashierName, Invoice.total FROM Invoice JOIN Client ON Client.id = Invoice.clientId JOIN Cashier ON Cashier.id = Invoice.cashierId"
+            ],
+            "hash": "fb329000228cc5a24c264c57139de8bf854fc86fc18bf1c04ab61a2b5cb4b921",
+            "hint": "The two sub-queries from vwDebtors, with Client.id replaced by Francesco's or Brandon's id.",
+            "rows": 1
+        },
+        {
+            "id": "m4u6-04-answers",
+            "type": "manual",
+            "file": "ANSWERS.md",
+            "hint": "What does SUM() give when there are no rows to add up?"
+        },
+        {
+            "id": "m4u6-04-6.4.2",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.4.2.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)",
+                "CREATE VIEW vwDebtors AS SELECT T.*, CASE WHEN T.balance <= 499 THEN 'Sales' ELSE 'Finance' END AS Department FROM (SELECT Client.id, Client.name, Client.surname, (SELECT SUM(Invoice.total) FROM Invoice WHERE Invoice.clientId = Client.id) - (SELECT SUM(Payment.total) FROM Payment WHERE Payment.clientId = Client.id) AS balance FROM Client HAVING balance IS NOT NULL) AS T",
+                "CREATE VIEW vwInvoiceDetails AS SELECT Invoice.id AS invoiceId, Invoice.clientId, Client.name, Client.surname, Cashier.name AS cashierName, Invoice.total FROM Invoice JOIN Client ON Client.id = Invoice.clientId JOIN Cashier ON Cashier.id = Invoice.cashierId"
+            ],
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwDebtors'",
+                    "equals": "vwDebtors",
+                    "say": "vwDebtors should be a view"
+                },
+                {
+                    "sql": "SELECT * FROM vwDebtors ORDER BY id",
+                    "equals": "2, Lorraine, Pulis, 373.91, Sales | 4, Rachel, Bonavia, 500.00, Finance | 5, Francesco, Rossi, 165.70, Sales | 6, Brandon, Pace, 67.15, Sales",
+                    "say": "vwDebtors"
+                }
+            ],
+            "hint": "Wrap the payments sub-query in COALESCE(..., 0). Leave the invoices sub-query as it is."
+        },
+        {
+            "id": "m4u6-04-6.4.3",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.4.3.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)",
+                "CREATE VIEW vwDebtors AS SELECT T.*, CASE WHEN T.balance <= 499 THEN 'Sales' ELSE 'Finance' END AS Department FROM (SELECT Client.id, Client.name, Client.surname, (SELECT SUM(Invoice.total) FROM Invoice WHERE Invoice.clientId = Client.id) - (SELECT SUM(Payment.total) FROM Payment WHERE Payment.clientId = Client.id) AS balance FROM Client HAVING balance IS NOT NULL) AS T",
+                "CREATE VIEW vwInvoiceDetails AS SELECT Invoice.id AS invoiceId, Invoice.clientId, Client.name, Client.surname, Cashier.name AS cashierName, Invoice.total FROM Invoice JOIN Client ON Client.id = Invoice.clientId JOIN Cashier ON Cashier.id = Invoice.cashierId"
+            ],
+            "hash": "2c2dad8c18bfb159d8aa831ee334c04b0a1bc8c5daba62aa6e86225bcb08af86",
+            "hint": "COALESCE((SELECT SUM(...) ...), 0) AS totalSpent",
+            "rows": 6
+        },
+        {
+            "id": "m4u6-04-6.4.4",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.4.4.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)",
+                "CREATE VIEW vwDebtors AS SELECT T.*, CASE WHEN T.balance <= 499 THEN 'Sales' ELSE 'Finance' END AS Department FROM (SELECT Client.id, Client.name, Client.surname, (SELECT SUM(Invoice.total) FROM Invoice WHERE Invoice.clientId = Client.id) - (SELECT SUM(Payment.total) FROM Payment WHERE Payment.clientId = Client.id) AS balance FROM Client HAVING balance IS NOT NULL) AS T",
+                "CREATE VIEW vwInvoiceDetails AS SELECT Invoice.id AS invoiceId, Invoice.clientId, Client.name, Client.surname, Cashier.name AS cashierName, Invoice.total FROM Invoice JOIN Client ON Client.id = Invoice.clientId JOIN Cashier ON Cashier.id = Invoice.cashierId"
+            ],
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwClientPayments'",
+                    "equals": "vwClientPayments",
+                    "say": "vwClientPayments should be a view"
+                },
+                {
+                    "sql": "SELECT id, name, surname, totalPaid FROM vwClientPayments ORDER BY id",
+                    "equals": "1, Lucy, Pace, 0.00 | 2, Lorraine, Pulis, 1549.99 | 3, Trevor, Musu, 0.00 | 4, Rachel, Bonavia, 700.99 | 5, Francesco, Rossi, 0.00 | 6, Brandon, Pace, 0.00",
+                    "say": "vwClientPayments"
+                }
+            ],
+            "hint": "COALESCE((SELECT SUM(Payment.total) FROM Payment WHERE Payment.clientId = Client.id), 0) AS totalPaid"
+        },
+        {
+            "id": "m4u6-04-6.4.5",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.4.5.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)",
+                "CREATE VIEW vwDebtors AS SELECT T.*, CASE WHEN T.balance <= 499 THEN 'Sales' ELSE 'Finance' END AS Department FROM (SELECT Client.id, Client.name, Client.surname, (SELECT SUM(Invoice.total) FROM Invoice WHERE Invoice.clientId = Client.id) - (SELECT SUM(Payment.total) FROM Payment WHERE Payment.clientId = Client.id) AS balance FROM Client HAVING balance IS NOT NULL) AS T",
+                "CREATE VIEW vwInvoiceDetails AS SELECT Invoice.id AS invoiceId, Invoice.clientId, Client.name, Client.surname, Cashier.name AS cashierName, Invoice.total FROM Invoice JOIN Client ON Client.id = Invoice.clientId JOIN Cashier ON Cashier.id = Invoice.cashierId"
+            ],
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwClientStatement'",
+                    "equals": "vwClientStatement",
+                    "say": "vwClientStatement should be a view"
+                },
+                {
+                    "sql": "SELECT id, name, surname, spent, paid, balance, status FROM vwClientStatement ORDER BY id",
+                    "equals": "1, Lucy, Pace, 0.00, 0.00, 0.00, No purchases | 2, Lorraine, Pulis, 1923.90, 1549.99, 373.91, Sales | 3, Trevor, Musu, 0.00, 0.00, 0.00, No purchases | 4, Rachel, Bonavia, 1200.99, 700.99, 500.00, Finance | 5, Francesco, Rossi, 165.70, 0.00, 165.70, Sales | 6, Brandon, Pace, 67.15, 0.00, 67.15, Sales",
+                    "say": "vwClientStatement"
+                },
+                {
+                    "exec": "INSERT INTO Payment (issueTime, cashierId, clientId, paymentTypeId, total) VALUES ('2022-01-25 09:00:00', 1, 6, 1, 67.15)",
+                    "say": "Brandon paying his 67.15"
+                },
+                {
+                    "sql": "SELECT balance, status FROM vwClientStatement WHERE id = 6",
+                    "equals": "0.00, Settled",
+                    "say": "Brandon after paying in full"
+                }
+            ],
+            "hint": "Inner query: id, name, surname, COALESCE(...) AS spent, COALESCE(...) AS paid, aliased T. Outer query: T.*, the balance and the CASE."
+        }
+    ]
+}

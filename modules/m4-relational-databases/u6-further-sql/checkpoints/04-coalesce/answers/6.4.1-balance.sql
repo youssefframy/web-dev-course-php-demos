@@ -1,0 +1,1 @@
+-- Unit 6, checkpoint 04, 6.4.1-balance. Write one SELECT statement below.
