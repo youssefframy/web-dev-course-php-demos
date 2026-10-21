@@ -1,0 +1,137 @@
+{
+    "checkpoint": "m4u6-cp03",
+    "title": "Boolean logic",
+    "exercises": [
+        {
+            "id": "m4u6-03-vwdebtors",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/vwDebtors.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)"
+            ],
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwDebtors'",
+                    "equals": "vwDebtors",
+                    "say": "vwDebtors should be a view"
+                },
+                {
+                    "sql": "SELECT * FROM vwDebtors ORDER BY id",
+                    "equals": "2, Lorraine, Pulis, 373.91, Sales | 4, Rachel, Bonavia, 500.00, Finance",
+                    "say": "vwDebtors"
+                }
+            ],
+            "hint": "Copy the view from the README."
+        },
+        {
+            "id": "m4u6-03-6.3.1",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.3.1.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)"
+            ],
+            "hash": "097c6d7781490101561c1f8fec8cf0a98b2fdea3ad1216124e932c02c5f3f845",
+            "hint": "Put the >= 1000 line before the >= 100 line.",
+            "rows": 5
+        },
+        {
+            "id": "m4u6-03-6.3.2",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.3.2.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)"
+            ],
+            "hash": "fd19fb7b8853ec4c7941470a1cb4338f9268674c3a828d54c6a22b7dc35fac32",
+            "hint": "CASE PaymentType.typeName WHEN 'Cash' THEN 'In store' ...",
+            "rows": 4
+        },
+        {
+            "id": "m4u6-03-6.3.3",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.3.3.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)"
+            ],
+            "hash": "634a0b017fe693e5d732e180094af6d9252e2c39f6632415d428afd3c5423329",
+            "hint": "Two WHEN lines: one with AND, one with OR. JOIN Item for the name.",
+            "rows": 8
+        },
+        {
+            "id": "m4u6-03-6.3.4",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.3.4.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)"
+            ],
+            "hash": "d1027e72459ce645cc06167c05df19f938de2f209e5dcdcd2a1f66cff57cfcf9",
+            "hint": "IF(Item.price >= 500, 'Premium', 'Standard') AS priceBand",
+            "rows": 8
+        },
+        {
+            "id": "m4u6-03-6.3.5",
+            "type": "query",
+            "db": "pos",
+            "file": "answers/6.3.5.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)"
+            ],
+            "hash": "d1027e72459ce645cc06167c05df19f938de2f209e5dcdcd2a1f66cff57cfcf9",
+            "hint": "CASE WHEN Item.price >= 500 THEN 'Premium' ELSE 'Standard' END",
+            "rows": 8
+        },
+        {
+            "id": "m4u6-03-answers",
+            "type": "manual",
+            "file": "ANSWERS.md",
+            "hint": "One of the two is in the ISO SQL standard."
+        },
+        {
+            "id": "m4u6-03-6.3.6",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.3.6.sql",
+            "setup": [
+                "INSERT INTO Invoice (id, total, cashierId, clientId, issueTime) VALUES (6, 165.70, 2, 5, '2022-01-24 10:05:00'), (7, 67.15, 1, 6, '2022-01-24 11:20:00')",
+                "INSERT INTO InvoiceItem (id, invoiceId, unitPrice, qty, itemId) VALUES (5, 6, 10.95, 6, 2), (6, 6, 100.00, 1, 6), (7, 7, 21.95, 2, 1), (8, 7, 23.25, 1, 4)",
+                "INSERT INTO Payment (id, issueTime, cashierId, clientId, paymentTypeId, total) VALUES (4, '2022-01-24 11:45:00', 2, 4, 1, 200.99)",
+                "INSERT INTO PaymentAllocation (id, paymentId, invoiceItemId, amount) VALUES (5, 4, 2, 200.99)"
+            ],
+            "assert": [
+                {
+                    "sql": "SELECT TABLE_NAME FROM information_schema.VIEWS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'vwDeliveryPlan'",
+                    "equals": "vwDeliveryPlan",
+                    "say": "vwDeliveryPlan should be a view"
+                },
+                {
+                    "sql": "SELECT id, unitPrice, name, catCode, deliveryMode FROM vwDeliveryPlan ORDER BY id",
+                    "equals": "1, 1099.99, Sony Bravia X3456, ENT, Van | 2, 1200.99, American Refridgeration B1, APP, Van | 3, 455.99, Microsoft Hololens 2, ENT, Large Parcel by Courier | 4, 45.99, Helfing Bone China Plate, CRK, Fragile Parcel | 5, 10.95, Matei X50 Spoon, CUT, Fragile Parcel | 6, 100.00, Russell Hobbs 890 Toaster, APP, Van | 7, 21.95, Matei Knife 21 Series, CUT, Fragile Parcel | 8, 23.25, Novelty Inc. Maxi Mug 5L, CRK, Fragile Parcel",
+                    "say": "vwDeliveryPlan (id, unitPrice, name, catCode, deliveryMode)"
+                }
+            ],
+            "hint": "JOIN Item and Category to InvoiceItem. Use the exact labels, e.g. 'Large Parcel by Courier'."
+        }
+    ]
+}

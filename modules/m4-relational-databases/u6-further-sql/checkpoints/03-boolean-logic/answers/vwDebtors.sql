@@ -1,0 +1,1 @@
+-- Unit 6, checkpoint 03, vwDebtors. Write your statements below.
