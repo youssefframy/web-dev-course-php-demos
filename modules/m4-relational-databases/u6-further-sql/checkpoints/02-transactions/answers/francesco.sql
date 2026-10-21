@@ -1,0 +1,1 @@
+-- Unit 6, checkpoint 02, francesco. Write your statements below.

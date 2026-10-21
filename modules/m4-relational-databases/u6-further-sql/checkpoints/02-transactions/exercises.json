@@ -1,0 +1,112 @@
+{
+    "checkpoint": "m4u6-cp02",
+    "title": "Transactions",
+    "exercises": [
+        {
+            "id": "m4u6-02-francesco",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/francesco.sql",
+            "assert": [
+                {
+                    "sql": "SELECT COUNT(*), MAX(total), MAX(cashierId) FROM Invoice WHERE clientId = 5",
+                    "equals": "1, 165.70, 2",
+                    "say": "Francesco's invoices (count, total, cashier)"
+                },
+                {
+                    "sql": "SELECT InvoiceItem.itemId, InvoiceItem.unitPrice, InvoiceItem.qty FROM InvoiceItem JOIN Invoice ON Invoice.id = InvoiceItem.invoiceId WHERE Invoice.clientId = 5 ORDER BY InvoiceItem.itemId",
+                    "equals": "2, 10.95, 6 | 6, 100.00, 1",
+                    "say": "Francesco's invoice items (itemId, unitPrice, qty)"
+                },
+                {
+                    "sql": "SELECT COUNT(*) FROM InvoiceItem",
+                    "equals": "6",
+                    "say": "InvoiceItem rows"
+                }
+            ],
+            "hint": "START TRANSACTION; INSERT the invoice; SET @ID = LAST_INSERT_ID(); INSERT both items with @ID; COMMIT;"
+        },
+        {
+            "id": "m4u6-02-6.2.1",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.2.1.sql",
+            "assert": [
+                {
+                    "sql": "SELECT COUNT(*), MAX(total), MAX(cashierId) FROM Invoice WHERE clientId = 6",
+                    "equals": "1, 67.15, 1",
+                    "say": "Brandon's invoices (count, total, cashier)"
+                },
+                {
+                    "sql": "SELECT InvoiceItem.itemId, InvoiceItem.unitPrice, InvoiceItem.qty FROM InvoiceItem JOIN Invoice ON Invoice.id = InvoiceItem.invoiceId WHERE Invoice.clientId = 6 ORDER BY InvoiceItem.itemId",
+                    "equals": "1, 21.95, 2 | 4, 23.25, 1",
+                    "say": "Brandon's invoice items (itemId, unitPrice, qty)"
+                },
+                {
+                    "sql": "SELECT COUNT(*) FROM InvoiceItem",
+                    "equals": "6",
+                    "say": "InvoiceItem rows"
+                },
+                {
+                    "sql": "SELECT issueTime > NOW() - INTERVAL 1 HOUR FROM Invoice WHERE clientId = 6",
+                    "equals": "1",
+                    "say": "Brandon's invoice issued now (use NOW())"
+                }
+            ],
+            "hint": "The same three steps as francesco.sql, with NOW() for issueTime."
+        },
+        {
+            "id": "m4u6-02-6.2.2",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.2.2.sql",
+            "forbid": [
+                "\\bCOMMIT\\b",
+                "\\bROLLBACK\\b"
+            ],
+            "assert": [
+                {
+                    "sql": "SELECT COUNT(*) FROM Invoice WHERE clientId = 3",
+                    "equals": "0",
+                    "say": "Trevor's invoices after the connection ends"
+                },
+                {
+                    "sql": "SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'Invoice'",
+                    "equals": "5",
+                    "say": "next Invoice id (an invoice should have been inserted, then rolled back)"
+                }
+            ],
+            "hint": "START TRANSACTION; INSERT the invoice; SET @ID = LAST_INSERT_ID(); and stop."
+        },
+        {
+            "id": "m4u6-02-6.2.3",
+            "type": "script",
+            "db": "pos",
+            "file": "answers/6.2.3.sql",
+            "assert": [
+                {
+                    "sql": "SELECT COUNT(*) FROM Payment",
+                    "equals": "4",
+                    "say": "Payment rows"
+                },
+                {
+                    "sql": "SELECT COUNT(*) FROM PaymentAllocation",
+                    "equals": "5",
+                    "say": "PaymentAllocation rows"
+                },
+                {
+                    "sql": "SELECT Payment.clientId, Payment.cashierId, Payment.paymentTypeId, Payment.total, PaymentAllocation.invoiceItemId, PaymentAllocation.amount FROM PaymentAllocation JOIN Payment ON Payment.id = PaymentAllocation.paymentId WHERE PaymentAllocation.id = (SELECT MAX(PaymentAllocation.id) FROM PaymentAllocation)",
+                    "equals": "4, 2, 1, 200.99, 2, 200.99",
+                    "say": "the new allocation (client, cashier, payment type, total, invoice item, amount)"
+                }
+            ],
+            "hint": "INSERT INTO Payment, SET @ID = LAST_INSERT_ID(), then INSERT INTO PaymentAllocation with @ID."
+        },
+        {
+            "id": "m4u6-02-checklist",
+            "type": "manual",
+            "file": "CHECKLIST.md",
+            "hint": "Disconnect with exit, reconnect with ./sql shell pos."
+        }
+    ]
+}

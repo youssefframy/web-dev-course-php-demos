@@ -1,0 +1,1 @@
+-- Unit 6, checkpoint 02, 6.2.1. Write your statements below.
