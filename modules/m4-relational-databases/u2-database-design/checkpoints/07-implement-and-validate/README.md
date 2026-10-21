@@ -64,7 +64,7 @@ Run these from the repository root.
    ```
 
 5. Open `checks.sql`. Uncomment one of the three inserts at the bottom, run the file again and read the error. Put the comment back before trying the next one. Each error names the constraint that stopped the insert.
-6. Open Adminer at <http://localhost:8080> (server `db`, user `root`, password `root`) and browse the `iceadmin` tables to see the same data.
+6. Open phpMyAdmin at <http://localhost:8080> (user `root`, password `root`) and browse the `iceadmin` tables to see the same data.
 7. Run `scripts/validate.sh`, then commit and push. Check that the Actions run on GitHub is green.
 
 ## Done when

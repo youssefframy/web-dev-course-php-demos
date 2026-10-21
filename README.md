@@ -28,7 +28,7 @@ If you open this repository in VS Code, it will offer to reopen it in a dev cont
    docker compose up -d --wait
    ```
 
-   MariaDB listens on port 3306 (user `root`, password `root`). Adminer, a browser-based database tool, runs at <http://localhost:8080>. Log in with server `db`, user `root` and password `root`.
+   MariaDB listens on port 3306 (user `root`, password `root`). phpMyAdmin, a browser-based database tool, runs at <http://localhost:8080>. Log in with user `root` and password `root`.
 
 2. Open the unit's README and start at checkpoint 01.
 3. Each checkpoint ends with a "Done when" checklist. Tick every item before moving on.

@@ -1,4 +1,4 @@
-# Adds the container VS Code runs in. The db, dbml and adminer services come from ../docker-compose.yml.
+# Adds the container VS Code runs in. The db, dbml and phpmyadmin services come from ../docker-compose.yml.
 services:
   workspace:
     image: mcr.microsoft.com/devcontainers/php:1-8.3-bookworm
