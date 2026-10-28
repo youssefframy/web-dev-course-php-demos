@@ -1,0 +1,2 @@
+<?php
+/* Constants and functions */

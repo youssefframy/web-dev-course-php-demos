@@ -10,6 +10,8 @@ Exercises for the Back-End Development With PHP course. Each unit is split into 
 | | [U4 Modifying Structure & Adding Constraints](modules/m4-relational-databases/u4-modify-constraints/README.md) | 01 to 08 |
 | | [U5 Queries](modules/m4-relational-databases/u5-queries/README.md) | 01 to 08 |
 | | [U6 Further SQL](modules/m4-relational-databases/u6-further-sql/README.md) | 01 to 04 |
+| [M5 PHP](modules/m5-php/README.md) | [U1 Welcome to PHP](modules/m5-php/u1-welcome-to-php/README.md) | 01 to 05 |
+| | [U2 Language Basics](modules/m5-php/u2-language-basics/README.md) | 01 to 07 |
 
 More units will be added here as the course progresses.
 

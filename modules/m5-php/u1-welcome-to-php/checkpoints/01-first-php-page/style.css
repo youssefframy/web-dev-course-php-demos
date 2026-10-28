@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  background: #f4f2fb;
+  color: #22212b;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+h1 {
+  margin-top: 0;
+  color: #425af2;
+}
+
+.card {
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(34, 33, 43, 0.1);
+}
+
+.role {
+  margin-top: -0.75rem;
+  color: #6b6880;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem;
+}
+
+dt {
+  font-weight: 600;
+}
+
+dd {
+  margin: 0;
+}
+
+.note {
+  padding: 0.75rem 1rem;
+  background: #efe8fd;
+  border-left: 4px solid #6c2bd9;
+  border-radius: 0.25rem;
+}
