@@ -35,6 +35,22 @@
             <td><?= is_numeric($value) ? 'yes' : 'no' ?></td>
             <td><?= $value ? 'truthy' : 'falsy' ?></td>
         </tr>
+        <?php $value = 1; ?>
+        <tr>
+            <td><code>1</code></td>
+            <td>truthy</td>
+            <td><?= gettype($value) ?></td>
+            <td><?= is_numeric($value) ? 'yes' : 'no' ?></td>
+            <td><?= $value ? 'truthy' : 'falsy' ?></td>
+        </tr>
+        <?php $value - null ?>
+        <tr>
+            <td><code>null</code></td>
+            <td>falsy</td>
+            <td><?= gettype($value) ?></td>
+            <td><?= is_numeric($value) ? 'yes' : 'no' ?></td>
+            <td><?= $value ? 'truthy' : 'falsy' ?></td>
+        </tr>
     </table>
 </body>
 

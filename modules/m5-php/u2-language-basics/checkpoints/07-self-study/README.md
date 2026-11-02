@@ -47,4 +47,4 @@ cp -R solutions/modules/m5-php/u2-language-basics/checkpoints/06-footer-summary/
 
 ## Previous / Next
 
-Previous: [06 Footer and PHP Summary](../06-footer-summary/README.md). Next: Unit 3, coming soon.
+Previous: [06 Footer and PHP Summary](../06-footer-summary/README.md). Next: [Unit 3: Operators and Control Flow](../../../u3-operators-control-flow/README.md).
