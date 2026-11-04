@@ -9,5 +9,6 @@ In this module you use PHP to build dynamic websites, and later connect them to 
 | U1 | [Welcome to PHP](u1-welcome-to-php/README.md) | Available |
 | U2 | [Language Basics](u2-language-basics/README.md) | Available |
 | U3 | [Operators and Control Flow](u3-operators-control-flow/README.md) | Available |
+| U4 | [Functions](u4-functions/README.md) | Available |
 
 Back to the [course index](../../README.md).

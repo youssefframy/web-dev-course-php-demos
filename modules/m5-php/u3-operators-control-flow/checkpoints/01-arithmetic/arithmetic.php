@@ -1,20 +1,9 @@
 <?php
-// Arithmetic Operators
 
-function addition($a, $b) {
-  echo -$a + $b;
+$result= true;
+
+if (!$result) {
+  echo "the actual result";
+} else {
+  echo "anything";
 }
-
-function multiplication($a, $b) {
-  echo $a * $b;
-}
-
-// ------------
-
-$a = [1, 2, 3];
-$b = [4,5,6];
-
-$c = $a + $b;
-
-print_r($c);
-
