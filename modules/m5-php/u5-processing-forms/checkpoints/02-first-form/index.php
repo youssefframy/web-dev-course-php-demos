@@ -25,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="email" id="email" name="email" value="<?= $email ?>"> <br><br>
     <label for="comments">Comments</label>
     <textarea name="comments" id="comments"><?= $comments ?></textarea>
+    <label for="date">Date</label>
+    <input type="date" name="date" id="date">date</input>
+    
     <input type="submit" value="send">
   </form>
 </body>

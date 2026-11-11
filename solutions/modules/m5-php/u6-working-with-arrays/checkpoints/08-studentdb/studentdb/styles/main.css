@@ -1,0 +1,15 @@
+body {
+    background: rgb(14, 116, 144);
+    background: linear-gradient(
+        180deg,
+        rgba(14, 116, 144, 1) 35%,
+        rgba(16, 185, 129, 1) 100%
+    );
+    background-attachment: fixed;
+    margin-top: 10px;
+}
+
+th a {
+    color: inherit;
+    text-decoration: none;
+}

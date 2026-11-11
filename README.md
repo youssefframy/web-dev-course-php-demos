@@ -15,6 +15,7 @@ Exercises for the Back-End Development With PHP course. Each unit is split into 
 | | [U3 Operators and Control Flow](modules/m5-php/u3-operators-control-flow/README.md) | 01 to 08 |
 | | [U4 Functions](modules/m5-php/u4-functions/README.md) | 01 to 07 |
 | | [U5 Processing Forms](modules/m5-php/u5-processing-forms/README.md) | 01 to 10 |
+| | [U6 Working With Arrays](modules/m5-php/u6-working-with-arrays/README.md) | 01 to 09 |
 
 More units will be added here as the course progresses.
 

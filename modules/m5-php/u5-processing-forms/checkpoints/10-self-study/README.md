@@ -50,4 +50,4 @@ cp -R solutions/modules/m5-php/u5-processing-forms/checkpoints/09-convertomatic/
 
 ## Previous / Next
 
-Previous: [09 Convertomatic](../09-convertomatic/README.md). Next: Unit 6, coming soon.
+Previous: [09 Convertomatic](../09-convertomatic/README.md). Next: [Unit 6, 01 Creating arrays](../../../u6-working-with-arrays/checkpoints/01-creating-arrays/README.md).

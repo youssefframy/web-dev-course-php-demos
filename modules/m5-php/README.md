@@ -11,5 +11,6 @@ In this module you use PHP to build dynamic websites, and later connect them to 
 | U3 | [Operators and Control Flow](u3-operators-control-flow/README.md) | Available |
 | U4 | [Functions](u4-functions/README.md) | Available |
 | U5 | [Processing Forms](u5-processing-forms/README.md) | Available |
+| U6 | [Working With Arrays](u6-working-with-arrays/README.md) | Available |
 
 Back to the [course index](../../README.md).
