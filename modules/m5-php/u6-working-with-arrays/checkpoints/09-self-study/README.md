@@ -43,4 +43,4 @@ Start the server in `modules/m5-php/u6-working-with-arrays/studentdb`.
 
 ## Previous / Next
 
-Previous: [08 StudentDB](../08-studentdb/README.md). Next: Unit 7, coming soon.
+Previous: [08 StudentDB](../08-studentdb/README.md). Next: [Unit 7 Object-Oriented Programming](../../../u7-object-oriented-programming/README.md).
