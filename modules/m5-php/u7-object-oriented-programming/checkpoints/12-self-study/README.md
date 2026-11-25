@@ -43,4 +43,4 @@ Today the checkout page empties the cart and says thank you, and nothing else.
 
 ## Previous / Next
 
-Previous: [11 Shopping cart](../11-shopping-cart/README.md). Next: Unit 8, coming soon.
+Previous: [11 Shopping cart](../11-shopping-cart/README.md). Next: [Unit 8 Working with Databases](../../../u8-working-with-databases/README.md).

@@ -13,5 +13,6 @@ In this module you use PHP to build dynamic websites, and later connect them to 
 | U5 | [Processing Forms](u5-processing-forms/README.md) | Available |
 | U6 | [Working With Arrays](u6-working-with-arrays/README.md) | Available |
 | U7 | [Object-Oriented Programming](u7-object-oriented-programming/README.md) | Available |
+| U8 | [Working with Databases](u8-working-with-databases/README.md) | Available |
 
 Back to the [course index](../../README.md).

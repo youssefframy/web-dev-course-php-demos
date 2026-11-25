@@ -17,6 +17,7 @@ Exercises for the Back-End Development With PHP course. Each unit is split into 
 | | [U5 Processing Forms](modules/m5-php/u5-processing-forms/README.md) | 01 to 10 |
 | | [U6 Working With Arrays](modules/m5-php/u6-working-with-arrays/README.md) | 01 to 09 |
 | | [U7 Object-Oriented Programming](modules/m5-php/u7-object-oriented-programming/README.md) | 01 to 12 |
+| | [U8 Working with Databases](modules/m5-php/u8-working-with-databases/README.md) | 01 to 08 |
 
 More units will be added here as the course progresses.
 

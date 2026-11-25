@@ -25,7 +25,7 @@ Usage: ./sql <command>
   drift <db>           Compare db/<db>/<db>.dbml with your database.
   sql2dbml <db>        Write db/<db>/<db>.dbml from your database.
 
-Databases: iceadmin, tvstudio, pos, joinlab.
+Databases: iceadmin, tvstudio, pos, joinlab, shoppingcart.
 TXT;
 const INSTRUCTOR_COMMANDS = <<<TXT
 

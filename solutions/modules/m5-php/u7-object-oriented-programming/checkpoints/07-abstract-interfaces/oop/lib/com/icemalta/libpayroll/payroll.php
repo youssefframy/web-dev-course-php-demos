@@ -63,9 +63,8 @@ class Manager extends Worker implements StaffMember
         return 'Retirement contribution, 24/7 Gym, Meals, Business-Class Travel';
     }
 
-    public function getHealthBenefitsString(): string
-    {
-        return 'Full private hospital, dental, cosmetic';
+    public function getHealthBenefitsString(): string {
+        return 'This is the health insurance text';
     }
 }
 

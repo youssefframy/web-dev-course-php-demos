@@ -35,6 +35,11 @@
       "snapshots": {"m4u5": "seeds/pos.sql"},
       "steps": []
     },
+    "shoppingcart": {
+      "base": "m5u8",
+      "snapshots": {"m5u8": "seeds/shoppingcart.sql"},
+      "steps": []
+    },
     "joinlab": {
       "base": "m4u5",
       "snapshots": {"m4u5": "seeds/joinlab.sql"},
